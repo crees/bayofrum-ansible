@@ -43,8 +43,11 @@
       owner: root
       group: wheel
       mode: '0644'
-  - name: remove builtin staff group
+  - name: remove selected builtin groups
     ansible.builtin.lineinfile:
-      line: 'staff:*:20:'
+      line: '{{ item }}'
       path: /etc/group
       state: absent
+    loop:
+      - 'staff:*:20:'
+      - 'video:*:44:'
