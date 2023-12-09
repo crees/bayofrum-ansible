@@ -1,0 +1,41 @@
+#!/bin/sh
+
+serial=$1
+shift
+ABI=$1; export ABI
+shift
+oldver=$1
+shift
+
+baserepo=pegasus-base
+
+ASSUME_ALWAYS_YES=YES; export ASSUME_ALWAYS_YES
+IGNORE_OSVERSION=YES; export IGNORE_OSVERSION
+
+#/usr/local/sbin/pkg upgrade -nr "$baserepo" >/dev/null && exit 0
+
+pkgstatic=/rescue/pkg-static
+
+cd /
+cp /usr/local/sbin/pkg-static $pkgstatic
+
+$pkgstatic fetch -r "$baserepo" $@
+
+$pkgstatic install -r "$baserepo" FreeBSD-runtime FreeBSD-clibs
+
+$pkgstatic upgrade -r "$baserepo"
+
+$pkgstatic install -r "$baserepo" $@
+
+for f in master.passwd passwd group; do
+	[ -f $f.pkgsave ] && mv $f.pkgsave $f
+done
+
+cap_mkdb /etc/master.passwd
+
+rm $pkgstatic
+
+/usr/local/sbin/pkg delete -g "FreeBSD-*-$oldver*" || true
+
+mkdir -p /var/db/ansible/pkg_base/serial
+touch /var/db/ansible/pkg_base/serial/$serial

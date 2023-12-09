@@ -1,0 +1,13 @@
+---
+
+- name: configure consolekit
+  hosts: workstations
+  become: true
+  tasks:
+  - name: add consolekit lock on resume rc file
+    ansible.builtin.template:
+      src: ../../templates/rc.d/lock_consolekit
+      dest: /usr/local/etc/rc.d/lock_consolekit
+      owner: root
+      group: wheel
+      mode: '0755'

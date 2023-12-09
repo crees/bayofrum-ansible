@@ -1,0 +1,30 @@
+---
+
+# Don't forget the mqtt password
+# Currently disabled
+
+- name: configure bluetooth_le_scanner
+  hosts: areion.bayofrum.net
+  become: true
+  tasks:
+  - name: install mosquitto_client
+    ansible.builtin.apt:
+      pkg: mosquitto-clients
+      update_cache: true
+  - name: install bluetooth_le_scanner
+    ansible.builtin.git:
+      repo: https://github.com/crees/bluetooth_le_scanner
+      dest: /var/lib/bluetooth_le_scanner
+  - name: configure bluetooth_le_scanner
+    ansible.builtin.template:
+      src: '../../templates/systemd/bluetooth_le_scanner.service'
+      dest: '/etc/systemd/system/bluetooth_le_scanner.service'
+  - name: ensure db directory exists
+    ansible.builtin.file:
+      path: /var/db/bluetooth_le_scanner
+      state: directory
+  - name: enable bluetooth_le_scanner
+    ansible.builtin.systemd_service:
+      name: bluetooth_le_scanner
+      enabled: false
+      state: stopped

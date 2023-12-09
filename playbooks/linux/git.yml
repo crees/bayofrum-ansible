@@ -1,0 +1,10 @@
+---
+
+- name: install git
+  hosts: areion.bayofrum.net
+  become: true
+  tasks:
+  - name: install git
+    ansible.builtin.apt:
+      update_cache: true
+      pkg: git

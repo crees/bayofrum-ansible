@@ -1,0 +1,12 @@
+#!/bin/sh
+# Sat Aug 13 16:39:46 BST 2016
+# Generated from rc.d file /usr/local/etc/rc.d/named
+# Needs editing to stop the daemon from daemonising-- must run in foreground!
+# Make sure that you replace su with chpst -u, or supervision will not work
+# correctly, and prepend exec.
+# For example:
+# su user -c 'sh -c "blah"'
+# replace with:
+# exec chpst -u user blah
+
+exec /usr/local/sbin/named -g -u bind -c /usr/local/etc/namedb/named.conf

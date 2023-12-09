@@ -1,0 +1,15 @@
+---
+
+- name: configure runit
+  hosts: areion.bayofrum.net
+  become: true
+  tasks:
+  - name: install runit
+    ansible.builtin.apt:
+      update_cache: true
+      pkg: runit
+  - name: enable runit
+    ansible.builtin.systemctl_service:
+      name: runit
+      enabled: true
+      state: started

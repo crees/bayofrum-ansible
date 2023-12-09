@@ -1,0 +1,25 @@
+#!/bin/sh
+#
+# PROVIDE: lock_consolekit
+# KEYWORD: resume
+
+. /etc/rc.subr
+
+name=lock_consolekit
+rcvar=lock_consolekit_enable
+desc="Locks ConsoleKit on resume"
+
+: ${lock_consolekit_enable=yes}
+
+extra_commands=resume
+resume_cmd="lock_consolekit_resume"
+start_cmd=:
+stop_cmd=:
+status_cmd=:
+
+lock_consolekit_resume()
+{
+	/usr/local/bin/dbus-send --system --print-reply --dest=org.freedesktop.ConsoleKit /org/freedesktop/ConsoleKit/Session2 org.freedesktop.ConsoleKit.Session.Lock
+}
+
+run_rc_command $*

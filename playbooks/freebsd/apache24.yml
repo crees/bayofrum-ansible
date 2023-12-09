@@ -1,0 +1,42 @@
+---
+
+- name: install and activate apache24
+  hosts: servers:external
+  vars:
+    srv: apache24
+  become: true
+  tasks:
+  - name: install {{ srv }}
+    pkgng:
+      name: '{{ srv }} mod_php80 ap24-mod_authnz_external24 ap24-mod_authz_unixgroup24'
+  - name: enable php and authz_external
+    ansible.builtin.template:
+      src: "{{ item.src }}"
+      dest: "{{ item.dest }}"
+      owner: root
+      group: wheel
+      mode: '0644'
+    loop:
+      - { src: '../../templates/apache24/modules.d/100_php.conf', dest: '/usr/local/etc/apache24/modules.d/100_php.conf' }
+      - { src: '../../templates/apache24/modules.d/101_authnz_external.conf', dest: '/usr/local/etc/apache24/modules.d/101_authnz_external.conf' }
+  - name: add {{ srv }} runsv directory
+    ansible.builtin.file:
+      path: '/etc/sv/{{ srv }}'
+      state: directory
+      mode: '0755'
+  - name: add {{ srv }} runsv file
+    ansible.builtin.template:
+      src: '../../templates/runit/{{ srv }}_run'
+      dest: '/etc/sv/{{ srv }}/run'
+      owner: root
+      group: wheel
+      mode: '0755'
+  - name: enable {{ srv }} boot
+    ansible.builtin.file:
+      src: '/etc/sv/{{ srv }}'
+      dest: '/var/service/{{ srv }}'
+      state: link
+  - name: reload Apache
+    community.general.runit:
+      name: apache24
+      state: reloaded

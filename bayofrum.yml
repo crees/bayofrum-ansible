@@ -1,0 +1,23 @@
+---
+
+- ansible.builtin.import_playbook: playbooks/freebsd/pkg.yml
+#- ansible.builtin.import_playbook: bayofrum/pkg_base.yml
+- ansible.builtin.import_playbook: playbooks/freebsd/sudo.yml
+- ansible.builtin.import_playbook: playbooks/freebsd/boot_loader_conf.yml
+- ansible.builtin.import_playbook: playbooks/freebsd/runit.yml
+- ansible.builtin.import_playbook: playbooks/freebsd/cron.yml
+#- ansible.builtin.import_playbook: playbooks/freebsd/all_pkgs.yml
+- ansible.builtin.import_playbook: playbooks/freebsd/consolekit.yml
+- ansible.builtin.import_playbook: playbooks/freebsd/roundcube.yml
+- ansible.builtin.import_playbook: playbooks/freebsd/ntpd.yml
+- ansible.builtin.import_playbook: playbooks/freebsd/bind.yml
+- ansible.builtin.import_playbook: playbooks/freebsd/sssd.yml
+- ansible.builtin.import_playbook: playbooks/freebsd/sshd.yml
+- ansible.builtin.import_playbook: playbooks/freebsd/cups.yml
+- ansible.builtin.import_playbook: playbooks/freebsd/syncthing.yml
+- ansible.builtin.import_playbook: playbooks/freebsd/apache24.yml
+- ansible.builtin.import_playbook: playbooks/freebsd/workstation_pkgs.yml
+- ansible.builtin.import_playbook: playbooks/freebsd/sddm.yml
+- ansible.builtin.import_playbook: playbooks/freebsd/dbus.yml
+- ansible.builtin.import_playbook: playbooks/freebsd/graphics_load.yml
+- ansible.builtin.import_playbook: playbooks/freebsd/webcamd.yml

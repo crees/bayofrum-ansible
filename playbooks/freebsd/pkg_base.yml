@@ -1,0 +1,13 @@
+---
+
+- name: install and upgrade FreeBSD base
+  hosts: bayofrum
+  become: true
+  vars:
+    basepkg_list: "{{ lookup('file', '../../pkglists/FreeBSD-base') | split('\n') | join(' ') }}"
+    srl: 1322
+  tasks:
+  - name: upgrade FreeBSD base
+    ansible.builtin.script:
+      creates: '/var/db/ansible/pkg_base/serial/{{ srl }}'
+      cmd: /usr/local/etc/ansible/scripts/FreeBSD-base-upgrade '{{ srl }}' FreeBSD:13:amd64 13.1 '{{ basepkg_list }}'

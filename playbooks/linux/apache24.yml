@@ -1,0 +1,52 @@
+---
+
+- name: configure Apache server
+  hosts: areion.bayofrum.net
+  become: true
+  tasks:
+  - name: install apache2
+    ansible.builtin.apt:
+      update_cache: true
+      pkg: apache2
+  - name: add runsv dirs
+    ansible.builtin.file:
+      path: '/etc/sv/{{ item }}'
+      state: directory
+    loop:
+      - apache2
+  - name: add runsv scripts
+    ansible.builtin.template:
+      src: '../../templates/runit/{{ item }}_run_linux'
+      dest: '/etc/sv/{{ item }}/run'
+      owner: root
+      group: root
+      mode: 0755
+    loop:
+      - apache2
+  - name: enable Jellyfin proxy
+    community.general.apache2_module:
+      name: '{{ item }}'
+      state: present
+    loop:
+      - headers
+      - proxy
+      - proxy_html
+      - proxy_http
+      - ssl
+      - proxy_wstunnel
+      - remoteip
+      - http2
+  - name: configure for Jellyfin
+    ansible.builtin.template:
+      src: '../../templates/apache24/areion_{{ item }}'
+      dest: '/etc/apache2/mods-available/{{ item }}'
+    loop:
+      - proxy_html.conf
+      - ssl.conf
+  - name: enable runsv scripts
+    ansible.builtin.file:
+      src: '/etc/sv/{{ item }}'
+      dest: '/etc/service/{{ item }}'
+      state: link
+    loop:
+      - apache2

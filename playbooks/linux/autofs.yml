@@ -1,0 +1,20 @@
+---
+
+- name: configure autofs
+  hosts: areion.bayofrum.net
+  become: true
+  tasks:
+  - name: install autofs
+    ansible.builtin.apt:
+      update_cache: true
+      pkg: autofs
+  - name: add autofs config files
+    ansible.builtin.template:
+      src: '../../templates/autofs/{{ item.src }}'
+      dest: '/etc/{{ item.dest }}'
+      owner: root
+      group: root
+      mode: 0644
+    loop:
+      - { src: auto_master_space, dest: auto.master.d/auto_master_space.autofs }
+      - { src: auto.space, dest: auto.space }

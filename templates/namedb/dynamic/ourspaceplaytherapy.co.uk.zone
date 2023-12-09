@@ -1,0 +1,24 @@
+$TTL	86400	; 1 day
+$ORIGIN ourspaceplaytherapy.co.uk.
+@	IN SOA	chrysaor.bayofrum.net. crees.ourspaceplaytherapy.co.uk. (
+		202308230  ; serial
+		7200       ; refresh (2 hours)
+		300        ; retry (5 minutes)
+		604800     ; expire (1 week)
+		60         ; minimum (1 minute)
+	)
+	IN NS	chrysaor.bayofrum.net.
+	IN MX	10 elgar.ourspaceplaytherapy.co.uk.
+	IN A	192.0.78.24
+	IN A	192.0.78.25
+$TTL 300	; 5 minutes
+*		CNAME	ourspaceplaytherapy.co.uk.
+elgar		A	109.154.126.49
+mail		CNAME	elgar
+imap		CNAME	elgar
+smtp		CNAME	elgar
+
+@		TXT	"v=spf1 a:chrysaor.bayofrum.net include:spf.titan.email ~all"
+_dmarc		TXT	"v=DMARC1;p=none;sp=none;adkim=r;aspf=r;pct=100"
+_domainconnect	TXT	"public-api.wordpress.com/rest/v1.3/domain-connect"
+dkim0._domainkey TXT	"v=DKIM1; k=rsa; p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDC1YGABjjhe6c48D41ezyusu0ltcmfjvg9HCUxSpEC7hYunzG01LEvvf807rSmSilgGc19BqUZVAscChSNbHjpIZgPjeR7S4Xm+8zhNm9Br68lEwnKvDmGObl1scC3bbYG/WoKJDtHMpAO2BG+h9czrJJ/tZtY1Jj8zim+g8xoIwIDAQAB"

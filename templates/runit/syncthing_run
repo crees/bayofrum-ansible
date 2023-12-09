@@ -1,0 +1,4 @@
+#!/bin/sh
+HOME=/root
+export HOME
+exec /usr/local/bin/syncthing

@@ -1,0 +1,26 @@
+//
+// Do any local configuration here
+//
+
+// Consider adding the 1918 zones here, if they are not used in your
+// organization
+//include "/etc/bind/zones.rfc1918";
+
+zone "bayofrum.net" {
+	type secondary;
+	primaries { 192.168.1.70; };
+	file "/var/lib/bind/db.bayofrum.net";
+};
+
+# Reverse Zone for bayofrum.net
+zone "1.168.192.in-addr.arpa" {
+	type secondary;
+	primaries { 192.168.1.70; };
+	file "/var/lib/bind/db.1.168.192";
+};
+
+zone "thistlecorner.net" {
+	type secondary;
+	primaries { 192.168.1.70; };
+	file "/var/lib/bind/db.thistlecorner.net";
+};

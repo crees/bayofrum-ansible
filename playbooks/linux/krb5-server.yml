@@ -1,0 +1,38 @@
+---
+
+- name: configure Kerberos server
+  hosts: areion.bayofrum.net
+  become: true
+  tasks:
+  - name: install kerberos
+    ansible.builtin.apt:
+      update_cache: true
+      pkg:
+        - heimdal-kdc
+        - heimdal-clients
+        - heimdal-servers
+  - name: add runsv dirs
+    ansible.builtin.file:
+      path: '/etc/sv/{{ item }}'
+      state: directory
+    loop:
+      - kdc
+      - ipropd-slave
+  - name: add runsv scripts
+    ansible.builtin.template:
+      src: '../../templates/runit/{{ item }}_run_linux'
+      dest: '/etc/sv/{{ item }}/run'
+      owner: root
+      group: root
+      mode: 0755
+    loop:
+      - kdc
+      - ipropd-slave
+  - name: enable runsv scripts
+    ansible.builtin.file:
+      src: '/etc/sv/{{ item }}'
+      dest: '/etc/service/{{ item }}'
+      state: link
+    loop:
+      - kdc
+      - ipropd-slave

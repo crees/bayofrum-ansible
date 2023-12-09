@@ -1,0 +1,48 @@
+---
+
+- name: install and activate BIND
+  hosts: chrysaor.bayofrum.net
+  vars:
+    srv: bind
+  become: true
+  tasks:
+  - name: install {{ srv }}
+    pkgng:
+      name: '{{ srv }}918'
+  - name: add {{ srv }} runsv directory
+    ansible.builtin.file:
+      path: '/etc/sv/{{ srv }}'
+      state: directory
+      mode: '0755'
+  - name: add {{ srv }} runsv file
+    ansible.builtin.template:
+      src: '../../templates/runit/{{ srv }}_run'
+      dest: '/etc/sv/{{ srv }}/run'
+      owner: root
+      group: wheel
+      mode: '0755'
+  - name: configure named
+    ansible.builtin.lineinfile:
+      dest: /usr/local/etc/namedb/named.conf
+      regexp: "{{ item.regexp }}"
+      line: "{{ item.line }}"
+    loop:
+      - { regexp: '^[\s/]*listen-on[\s]', line: '//	listen-on	{ 127.0.0.1; };' }
+      - { regexp: 'update.key";$', line: 'include "/usr/local/etc/namedb/update.key";' }
+      - { regexp: '^zone "ourspaceplaytherapy.co.uk" ', line: 'zone "ourspaceplaytherapy.co.uk" { type primary; file "/usr/local/etc/namedb/dynamic/ourspaceplaytherapy.co.uk.zone"; update-policy { grant update-key name elgar.ourspaceplaytherapy.co.uk. A TXT; }; };' }
+#  - name: add zones
+#    ansible.builtin.template:
+#      src: '../../templates/namedb/dynamic/ourspaceplaytherapy.co.uk.zone'
+#      dest: '/usr/local/etc/namedb/dynamic/ourspaceplaytherapy.co.uk.zone'
+#      owner: root
+#      group: wheel
+#      mode: '0644'
+  - name: enable {{ srv }} boot
+    ansible.builtin.file:
+      src: '/etc/sv/{{ srv }}'
+      dest: '/var/service/{{ srv }}'
+      state: link
+  - name: reload {{ srv }}
+    community.general.runit:
+      name: '{{ srv }}'
+      state: reloaded

@@ -1,0 +1,3 @@
+#!/bin/sh
+
+exec /usr/bin/env APACHE_ARGUMENTS=-DNO_DETACH APACHE_STARTED_BY_SYSTEMD=false /usr/sbin/apachectl start

@@ -1,0 +1,25 @@
+---
+
+# Don't forget the RNDC key
+
+- name: configure BIND
+  hosts: areion.bayofrum.net
+  become: true
+  tasks:
+  - name: install bind9
+    ansible.builtin.apt:
+      update_cache: true
+      pkg: bind9
+  - name: configure bind9
+    ansible.builtin.template:
+      src: '../../templates/namedb/{{ item }}'
+      dest: '/etc/bind/{{ item }}'
+    loop:
+      - named.conf.options
+      - named.conf.local
+  - name: enable bind9
+    ansible.builtin.systemd_service:
+      name: bind9
+      enabled: true
+      state: started
+

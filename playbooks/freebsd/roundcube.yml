@@ -1,0 +1,22 @@
+---
+
+- name: install and activate roundcube
+  hosts: pegasus.bayofrum.net
+  become: true
+  tasks:
+  - name: install roundcube
+    pkgng:
+      name: roundcube-php80
+  - name: enable roundcube alias
+    ansible.builtin.template:
+      src: "{{ item.src }}"
+      dest: "{{ item.dest }}"
+      owner: root
+      group: wheel
+      mode: '0644'
+    loop:
+      - { src: '../../templates/apache24/modules.d/000_roundcube.conf', dest: '/usr/local/etc/apache24/modules.d/000_roundcube.conf' }
+  - name: reload Apache
+    community.general.runit:
+      name: apache24
+      state: reloaded
