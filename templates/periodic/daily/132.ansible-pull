@@ -1,0 +1,28 @@
+#!/bin/sh -
+
+if [ -r /etc/defaults/periodic.conf ]; then
+	. /etc/defaults/periodic.conf
+	source_periodic_confs
+fi
+
+rc=0
+
+case "${daily_ansible_pull_github_enable:-no}" in
+[Nn][Oo])
+	;;
+*)
+	if [ -z "$daily_ansible_pull_github_repo" ]; then
+		echo 'please check the ansible-pull script to check all vars filled in'
+		exit 2
+	fi
+
+	pullcmd="/usr/local/bin/ansible-pull -U https://github.com/$daily_ansible_pull_github_repo $daily_ansible_pull_playbook"
+
+	if ! $pullcmd >/dev/null 2>&1 ; then
+		echo 'ansible-pull script failed- try running it manually'
+		rc=2
+	fi
+	;;
+esac
+
+exit $rc
