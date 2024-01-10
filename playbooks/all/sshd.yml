@@ -1,7 +1,7 @@
 ---
 
 - name: enable GSSAPI and runit for sshd
-  hosts: bayofrum
+  hosts: all
   become: true
   tasks:
   - name: configure sshd

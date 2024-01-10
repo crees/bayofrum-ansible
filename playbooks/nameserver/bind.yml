@@ -1,7 +1,7 @@
 ---
 
 - name: install and activate BIND
-  hosts: chrysaor.bayofrum.net
+  hosts: all
   vars:
     srv: bind
   become: true

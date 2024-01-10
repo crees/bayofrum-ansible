@@ -1,7 +1,7 @@
 ---
 
 - name: configure consolekit
-  hosts: workstations
+  hosts: all
   become: true
   tasks:
   - name: add consolekit lock on resume rc file

@@ -1,7 +1,7 @@
 ---
 
 - name: install and activate roundcube
-  hosts: pegasus.bayofrum.net
+  hosts: all
   become: true
   tasks:
   - name: install roundcube

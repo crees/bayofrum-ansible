@@ -1,7 +1,7 @@
 ---
 
 - name: install and set CUPS to start from runit
-  hosts: workstations
+  hosts: all
   vars:
     srv: cupsd
   become: true

@@ -1,7 +1,7 @@
 ---
 
 - name: install and activate apache24
-  hosts: servers:external
+  hosts: wn
   vars:
     srv: apache24
   become: true

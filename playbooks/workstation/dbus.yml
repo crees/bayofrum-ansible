@@ -1,14 +1,11 @@
 ---
 
-- name: install and activate syncthing
-  hosts: servers
+- name: run dbus from runit
+  hosts: all
   vars:
-    srv: syncthing
+    srv: dbus
   become: true
   tasks:
-  - name: install {{ srv }}
-    pkgng:
-      name: '{{ srv }}'
   - name: add {{ srv }} runsv directory
     ansible.builtin.file:
       path: '/etc/sv/{{ srv }}'
@@ -26,12 +23,13 @@
       src: '/etc/sv/{{ srv }}'
       dest: '/var/service/{{ srv }}'
       state: link
-  - name: enable auth Apache
-    ansible.builtin.template:
-      src: "{{ item.src }}"
-      dest: "{{ item.dest }}"
-      owner: www
-      group: www
-      mode: '0600'
-    loop:
-      - { src: '../../templates/apache24/modules.d/102_syncthing_proxy.conf', dest: '/usr/local/etc/apache24/modules.d/102_syncthing_proxy.conf' }
+  - name: disable {{ srv }} rc.conf
+    community.general.sysrc:
+      name: '{{ srv }}_enable'
+      value: "no"
+    register: sysrc
+  - name: kill {{ srv }} for runit takeover
+    ansible.builtin.service:
+      name: '{{ srv }}'
+      state: stopped
+    when: sysrc.changed

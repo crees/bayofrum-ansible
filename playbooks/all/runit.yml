@@ -1,7 +1,7 @@
 ---
 
 - name: install and activate runit
-  hosts: bayofrum
+  hosts: all
   become: true
   tasks:
   - name: install runit

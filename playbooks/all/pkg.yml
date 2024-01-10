@@ -1,7 +1,7 @@
 ---
 
 - name: configure pkg repos
-  hosts: bayofrum
+  hosts: all
   become: true
   tasks:
   - name: ensure repo dirs exist

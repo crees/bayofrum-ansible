@@ -1,9 +1,9 @@
 ---
 
-- name: run dbus from runit
-  hosts: workstations
+- name: run sddm from runit
+  hosts: all
   vars:
-    srv: dbus
+    srv: sddm
   become: true
   tasks:
   - name: add {{ srv }} runsv directory

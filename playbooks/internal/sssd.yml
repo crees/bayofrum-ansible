@@ -1,7 +1,7 @@
 ---
 
 - name: install and activate sssd
-  hosts: internal
+  hosts: all
   become: true
   tasks:
   - name: install sssd

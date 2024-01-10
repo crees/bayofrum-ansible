@@ -1,7 +1,7 @@
 ---
 
 - name: install and upgrade FreeBSD base
-  hosts: bayofrum
+  hosts: all
   become: true
   vars:
     basepkg_list: "{{ lookup('file', '../../pkglists/FreeBSD-base') | split('\n') | join(' ') }}"
