@@ -1,0 +1,11 @@
+---
+
+- ansible.builtin.import_playbook: playbooks/all/pkg.yml
+- ansible.builtin.import_playbook: playbooks/all/pkg_base.yml
+- ansible.builtin.import_playbook: playbooks/all/all_pkgs.yml
+- ansible.builtin.import_playbook: playbooks/all/runit.yml
+- ansible.builtin.import_playbook: playbooks/internal/sssd.yml
+- ansible.builtin.import_playbook: playbooks/all/sudo.yml
+- ansible.builtin.import_playbook: playbooks/all/sshd.yml
+- ansible.builtin.import_playbook: playbooks/all/cron.yml
+- ansible.builtin.import_playbook: playbooks/all/periodic_ansible_pull.yml
