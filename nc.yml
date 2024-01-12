@@ -1,12 +1,12 @@
 ---
 
-- ansible.builtin.import_playbook: playbooks/all/pkg.yml
-- ansible.builtin.import_playbook: playbooks/all/pkg_base.yml
-- ansible.builtin.import_playbook: playbooks/all/all_pkgs.yml
-- ansible.builtin.import_playbook: playbooks/all/runit.yml
+- ansible.builtin.import_playbook: playbooks/bayofrum/pkg.yml
+- ansible.builtin.import_playbook: playbooks/bayofrum/pkg_base.yml
+- ansible.builtin.import_playbook: playbooks/bayofrum/all_pkgs.yml
+- ansible.builtin.import_playbook: playbooks/bayofrum/runit.yml
 - ansible.builtin.import_playbook: playbooks/internal/sssd.yml
-- ansible.builtin.import_playbook: playbooks/all/sudo.yml
-- ansible.builtin.import_playbook: playbooks/all/sshd.yml
-- ansible.builtin.import_playbook: playbooks/all/cron.yml
-- ansible.builtin.import_playbook: playbooks/all/periodic_ansible_pull.yml
+- ansible.builtin.import_playbook: playbooks/bayofrum/sudo.yml
+- ansible.builtin.import_playbook: playbooks/bayofrum/sshd.yml
+- ansible.builtin.import_playbook: playbooks/bayofrum/cron.yml
+- ansible.builtin.import_playbook: playbooks/bayofrum/periodic_ansible_pull.yml
 - ansible.builtin.import_playbook: playbooks/webserver/apache24.yml

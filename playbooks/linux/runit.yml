@@ -1,7 +1,7 @@
 ---
 
 - name: configure runit
-  hosts: areion.bayofrum.net
+  hosts: linux
   become: true
   tasks:
   - name: install runit

@@ -1,7 +1,7 @@
 ---
 
 - name: install relevant pkgs
-  hosts: all
+  hosts: bayofrum
   become: true
   tasks:
   - name: install relevant pkgs

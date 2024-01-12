@@ -1,7 +1,7 @@
 ---
 
 - name: run dbus from runit
-  hosts: all
+  hosts: workstation
   vars:
     srv: dbus
   become: true

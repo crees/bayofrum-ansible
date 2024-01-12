@@ -1,7 +1,7 @@
 ---
 
 - name: add items to loader.conf
-  hosts: all
+  hosts: workstation
   become: true
   tasks:
   - name: fix loader.conf

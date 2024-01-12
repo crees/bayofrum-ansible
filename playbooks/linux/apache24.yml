@@ -1,7 +1,7 @@
 ---
 
 - name: configure Apache server
-  hosts: areion.bayofrum.net
+  hosts: linux
   become: true
   tasks:
   - name: install apache2

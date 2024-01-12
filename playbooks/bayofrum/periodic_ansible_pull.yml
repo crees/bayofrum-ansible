@@ -1,7 +1,7 @@
 ---
 
 - name: schedule ansible-pull for daily
-  hosts: all
+  hosts: bayofrum
   become: true
   tasks:
   - name: add periodic daily directory

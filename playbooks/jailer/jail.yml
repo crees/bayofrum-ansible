@@ -1,7 +1,7 @@
 ---
 
 - name: Configure jails
-  hosts: all
+  hosts: pegasus.bayofrum.net
   become: true
   tasks:
   - name: add jail.conf.d

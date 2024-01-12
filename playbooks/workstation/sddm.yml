@@ -1,7 +1,7 @@
 ---
 
 - name: run sddm from runit
-  hosts: all
+  hosts: workstation
   vars:
     srv: sddm
   become: true

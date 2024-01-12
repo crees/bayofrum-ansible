@@ -1,7 +1,7 @@
 ---
 
 - name: install and activate BIND
-  hosts: all
+  hosts: external
   vars:
     srv: bind
   become: true

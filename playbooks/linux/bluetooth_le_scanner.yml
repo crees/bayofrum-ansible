@@ -4,7 +4,7 @@
 # Currently disabled
 
 - name: configure bluetooth_le_scanner
-  hosts: areion.bayofrum.net
+  hosts: linux
   become: true
   tasks:
   - name: install mosquitto_client
