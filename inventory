@@ -1,0 +1,25 @@
+all:
+  children:
+    bayofrum:
+      children:
+        external:
+          hosts:
+            chrysaor.bayofrum.net:
+        internal:
+          children:
+            server:
+              hosts:
+                pegasus.bayofrum.net:
+                nc.bayofrum.net:
+            workstation:
+              hosts:
+                hydra.bayofrum.net:
+              children:
+                laptop:
+                  hosts:
+                    perseus.bayofrum.net:
+                    heracles.bayofrum.net:
+                    graeae.bayofrum.net:
+    linux:
+      hosts:
+        areion.bayofrum.net:
