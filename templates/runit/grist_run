@@ -1,0 +1,7 @@
+#!/bin/sh
+
+export APP_HOME_URL="https://db.bayofrum.net/"
+
+cd /usr/local/www/grist
+
+exec /usr/local/bin/yarn start

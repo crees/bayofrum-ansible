@@ -1,0 +1,39 @@
+---
+
+- name: install and configure grist
+  hosts: pegasus.bayofrum.net
+  become: true
+  vars:
+    location: /usr/local/www/grist
+  tasks:
+  #- name: install required PHP modules
+  #  pkgng:
+  #    name:
+  - name: check grist exists
+    ansible.builtin.stat:
+      path: '{{ location }}'
+    register: grist_exists
+  - name: install grist
+    ansible.builtin.git:
+      repo: https://github.com/gristlabs/grist-core
+      dest: '{{ location }}'
+    when: grist_exists.stat.isdir is not defined or not grist_exists.stat.isdir
+  - name: npm run build needs to be yarn stuff and fix python and bash paths
+    ansible.builtin.command:
+      cmd: npm run build
+      args:
+        chdir: "{{ location }}"
+    when: grist_exists.stat.isdir is not defined or not grist_exists.stat.isdir
+  - name: make sure www owns all
+    ansible.builtin.command:
+      cmd: 'chown -R www:www {{ location }}'
+    when: grist_exists.stat.isdir is not defined or not grist_exists.stat.isdir
+  - name: add Apache config file
+    ansible.builtin.template:
+      src: "{{ item.src }}"
+      dest: "{{ item.dest }}"
+      owner: root
+      group: wheel
+      mode: '0644'
+    loop:
+      - { src: '../../templates/apache24/Includes/109_grist.conf', dest: '/usr/local/etc/apache24/Includes/109_grist.conf' }
