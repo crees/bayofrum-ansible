@@ -10,6 +10,7 @@ mail/thunderbird
 net/syncthing
 net/tigervnc-viewer
 net/xrdp
+net-mgmt/networkmgr
 print/gutenprint
 sysutils/fusefs-ext2
 sysutils/fusefs-ntfs-compression
