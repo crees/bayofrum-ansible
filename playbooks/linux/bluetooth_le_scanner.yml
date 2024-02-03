@@ -4,7 +4,7 @@
 # Currently disabled
 
 - name: configure bluetooth_le_scanner
-  hosts: linux
+  hosts: btscanners
   become: true
   tasks:
   - name: install mosquitto_client

@@ -3,7 +3,7 @@
 # Don't forget the RNDC key
 
 - name: configure BIND
-  hosts: areion.bayofrum.net
+  hosts: linux
   become: true
   tasks:
   - name: install bind9
@@ -22,4 +22,3 @@
       name: bind9
       enabled: true
       state: started
-

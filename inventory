@@ -21,5 +21,11 @@ all:
                     heracles.bayofrum.net:
                     graeae.bayofrum.net:
     linux:
-      hosts:
-        areion.bayofrum.net:
+      children:
+        jellyfin:
+          hosts:
+            areion.bayofrum.net:
+        btscanners:
+          hosts:
+            karpo.bayofrum.net:
+            tulpar.bayofrum.net:
