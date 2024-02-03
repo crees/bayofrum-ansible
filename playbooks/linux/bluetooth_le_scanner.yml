@@ -26,5 +26,5 @@
   - name: enable bluetooth_le_scanner
     ansible.builtin.systemd_service:
       name: bluetooth_le_scanner
-      enabled: false
-      state: stopped
+      enabled: true
+      state: started
