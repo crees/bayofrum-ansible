@@ -1,0 +1,90 @@
+---
+
+- name: install and configure openemr
+  hosts: pegasus.bayofrum.net
+  become: true
+  vars:
+    location: /usr/local/www/data/openemr
+  tasks:
+  - name: install required PHP modules
+    pkgng:
+      name:
+        - php81-bz2
+        - php81-ctype
+        - php81-curl
+        - php81-dom
+        - php81-exif
+        - php81-fileinfo
+        - php81-filter
+        - php81-gd
+        - php81-gettext
+        - php81-iconv
+        - php81-intl
+        - php81-ldap
+        - php81-mbstring
+        - php81-mysqli
+        - php81-pcntl
+        - php81-pdo
+        - php81-pdo_mysql
+        - php81-pdo_sqlite
+        - php81-phar
+        - php81-session
+        - php81-simplexml
+        - php81-soap
+        - php81-sodium
+        - php81-sqlite3
+        - php81-tokenizer
+        - php81-xml
+        - php81-xmlreader
+        - php81-xmlwriter
+        - php81-zip
+        - php81-zlib
+  - name: check openemr exists
+    ansible.builtin.stat:
+      path: '{{ location }}'
+    register: openemr_exists
+  - name: install openemr
+    ansible.builtin.git:
+      repo: https://github.com/openemr/openemr
+      dest: '{{ location }}'
+    when: openemr_exists.stat.isdir is not defined or not openemr_exists.stat.isdir
+  - name: compose
+    community.general.composer:
+      command: install
+      arguments: --no-dev
+      working_dir: '{{ location }}'
+    when: openemr_exists.stat.isdir is not defined or not openemr_exists.stat.isdir
+  - name: npm install
+    community.general.npm:
+      path: '{{ location }}'
+      state: present
+    when: openemr_exists.stat.isdir is not defined or not openemr_exists.stat.isdir
+  - name: npm run build
+    ansible.builtin.command:
+      cmd: npm run build
+      args:
+        chdir: "{{ location }}"
+    when: openemr_exists.stat.isdir is not defined or not openemr_exists.stat.isdir
+  - name: make sure www owns all
+    ansible.builtin.command:
+      cmd: 'chown -R www:www {{ location }}'
+    when: openemr_exists.stat.isdir is not defined or not openemr_exists.stat.isdir
+  - name: configure php
+    ansible.builtin.lineinfile:
+      path: /usr/local/etc/php.ini-production
+      regexp: "{{ item.regexp }}"
+      line: "{{ item.line }}"
+    loop:
+      - { regexp: '^max_input_time', line: 'max_input_time = -1' }
+      - { regexp: '^mysqli.allow_local_infile', line: 'mysqli.allow_local_infile = On' }
+      - { regexp: '^file_uploads', line: 'file_uploads = On' }
+      - { regexp: '^upload_max_filesize', line: 'upload_max_filesize = 500M' }
+  - name: add Apache config file
+    ansible.builtin.template:
+      src: "{{ item.src }}"
+      dest: "{{ item.dest }}"
+      owner: root
+      group: wheel
+      mode: '0644'
+    loop:
+      - { src: '../../templates/apache24/modules.d/108_openemr.conf', dest: '/usr/local/etc/apache24/modules.d/108_openemr.conf' }
