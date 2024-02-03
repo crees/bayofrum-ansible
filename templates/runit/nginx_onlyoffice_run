@@ -1,0 +1,3 @@
+#!/bin/sh
+
+exec /usr/local/sbin/nginx -g 'daemon off;' -c /usr/local/etc/onlyoffice/documentserver/nginx/nginx.conf

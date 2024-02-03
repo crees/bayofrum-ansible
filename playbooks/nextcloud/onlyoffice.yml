@@ -1,0 +1,83 @@
+---
+
+- name: install OnlyOffice
+  hosts: nc.bayofrum.net
+  become: true
+  tasks:
+  - name: install pkg
+    pkgng:
+      name:
+        - onlyoffice-documentserver
+  - name: configure rabbitmq
+    ansible.builtin.lineinfile:
+      path: /usr/local/etc/rabbitmq/rabbitmq.conf
+      regexp: "{{ item.regexp }}"
+      line: "{{ item.line }}"
+    loop:
+      - { regexp: '^[# ]*listeners.tcp.local *= ', line: 'listeners.tcp.local = 127.0.0.1:5672' }
+  - name: add rabbitmq runsv directory
+    ansible.builtin.file:
+      path: /etc/sv/rabbitmq
+      state: directory
+      mode: '0755'
+  - name: add rabbitmq runsv file
+    ansible.builtin.template:
+      src: ../../templates/runit/rabbitmq_run
+      dest: /etc/sv/rabbitmq/run
+      owner: root
+      group: wheel
+      mode: '0755'
+  - name: enable rabbitmq boot
+    ansible.builtin.file:
+      src: /etc/sv/rabbitmq
+      dest: /var/service/rabbitmq
+      state: link
+  - name: configure supervisord
+    ansible.builtin.lineinfile:
+      path: /usr/local/etc/supervisord.conf
+      regexp: "{{ item.regexp }}"
+      line: "{{ item.line }}"
+    loop:
+      - { regexp: '^[; ]*[[]include[]] ', line: '[include]' }
+      - { regexp: '^files = ', line: 'files = /usr/local/etc/onlyoffice/documentserver/supervisor/*.conf' }
+  - name: add supervisord runsv directory
+    ansible.builtin.file:
+      path: /etc/sv/supervisord
+      state: directory
+      mode: '0755'
+  - name: add supervisord runsv file
+    ansible.builtin.template:
+      src: ../../templates/runit/supervisord_run
+      dest: /etc/sv/supervisord/run
+      owner: root
+      group: wheel
+      mode: '0755'
+  - name: enable supervisord boot
+    ansible.builtin.file:
+      src: /etc/sv/supervisord
+      dest: /var/service/supervisord
+      state: link
+  - name: configure nginx_onlyoffice
+    ansible.builtin.template:
+      src: ../../templates/onlyoffice/nginx.conf
+      dest: /usr/local/etc/onlyoffice/documentserver/nginx/nginx.conf
+      owner: root
+      group: wheel
+      mode: '0755'
+  - name: add nginx_onlyoffice runsv directory
+    ansible.builtin.file:
+      path: /etc/sv/nginx_onlyoffice
+      state: directory
+      mode: '0755'
+  - name: add nginx_onlyoffice runsv file
+    ansible.builtin.template:
+      src: ../../templates/runit/nginx_onlyoffice_run
+      dest: /etc/sv/nginx_onlyoffice/run
+      owner: root
+      group: wheel
+      mode: '0755'
+  - name: enable nginx_onlyoffice boot
+    ansible.builtin.file:
+      src: /etc/sv/nginx_onlyoffice
+      dest: /var/service/nginx_onlyoffice
+      state: link

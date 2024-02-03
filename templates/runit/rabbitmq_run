@@ -1,0 +1,5 @@
+#!/bin/sh
+
+export HOME=/var/db/rabbitmq
+
+exec /usr/local/sbin/chpst -u rabbitmq /usr/local/sbin/rabbitmq-server
