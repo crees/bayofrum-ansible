@@ -1,0 +1,11 @@
+#!/bin/sh
+# Make sure that you replace su with chpst -u, or supervision will not work
+# correctly, and prepend exec.
+# For example:
+# su user -c 'sh -c "blah"'
+# replace with:
+# exec chpst -u user blah
+
+
+exec chpst -u redis /usr/local/bin/redis-server /usr/local/etc/redis.conf
+

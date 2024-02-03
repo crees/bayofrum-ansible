@@ -1,0 +1,55 @@
+---
+
+- name: ensure Nextcloud environment works
+  hosts: nc.bayofrum.net
+  become: true
+  tasks:
+  - name: install required PHP modules
+    pkgng:
+      name:
+        - php81-ctype
+        - php81-curl
+        - php81-dom
+        - php81-filter
+        - php81-fileinfo
+        - php81-gd
+        - php81-xml
+        - php81-mbstring
+        - php81-opcache
+        - php81-posix
+        - php81-session
+        - php81-simplexml
+        - php81-sysvsem
+        - php81-xmlreader
+        - php81-xmlwriter
+        - php81-zip
+        - php81-zlib
+        - php81-pdo_mysql
+        - php81-bz2
+        - php81-intl
+        - php81-sodium
+        - php81-ldap
+        - php81-ftp
+        - php81-imap
+        - php81-bcmath
+        - php81-gmp
+        - php81-exif
+        - php81-pecl-APCu
+        - php81-pecl-redis
+        - php81-pecl-imagick
+  - name: add cronjob
+    ansible.builtin.template:
+      src: '../../templates/cron.d/nextcloud'
+      dest: '/etc/cron.d/nextcloud'
+      owner: root
+      group: wheel
+      mode: '0644'
+  - name: enable rewrite targets
+    ansible.builtin.template:
+      src: "{{ item.src }}"
+      dest: "{{ item.dest }}"
+      owner: root
+      group: wheel
+      mode: '0644'
+    loop:
+      - { src: '../../templates/apache24/modules.d/106_nextcloud.conf', dest: '/usr/local/etc/apache24/modules.d/106_nextcloud.conf' }

@@ -1,0 +1,33 @@
+---
+
+- name: install and activate redis
+  hosts: nc.bayofrum.net
+  become: true
+  tasks:
+  - name: install redis
+    pkgng:
+      name: redis
+  - name: configure redis
+    ansible.builtin.lineinfile:
+      path: /usr/local/etc/redis.conf
+      regexp: "{{ item.regexp }}"
+      line: "{{ item.line }}"
+    loop:
+      - { regexp: '^daemonize ', line: 'daemonize no' }
+  - name: add redis runsv directory
+    ansible.builtin.file:
+      path: /etc/sv/redis
+      state: directory
+      mode: '0755'
+  - name: add redis runsv file
+    ansible.builtin.template:
+      src: ../../templates/runit/redis_run
+      dest: /etc/sv/redis/run
+      owner: root
+      group: wheel
+      mode: '0755'
+  - name: enable redis boot
+    ansible.builtin.file:
+      src: /etc/sv/redis
+      dest: /var/service/redis
+      state: link

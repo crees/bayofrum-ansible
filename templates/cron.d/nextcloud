@@ -1,0 +1,5 @@
+SHELL=/bin/sh
+PATH=/etc:/bin:/sbin:/usr/bin:/usr/sbin
+
+# See crontab(5) for field format.
+*/5	*	*	*	*	www	/usr/local/bin/php /usr/local/www/apache24/data/cron.php
