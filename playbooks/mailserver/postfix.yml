@@ -1,0 +1,42 @@
+---
+
+- name: install and activate postfix
+  hosts: pegasus.bayofrum.net
+  become: true
+  tasks:
+  - name: install postfix-sasl
+    pkgng:
+      name: postfix-sasl postfix-policyd-spf-perl
+  - name: add postfix runsv directory
+    ansible.builtin.file:
+      path: /etc/sv/postfix
+      state: directory
+      mode: '0755'
+  - name: add postfix runsv file
+    ansible.builtin.template:
+      src: ../../templates/runit/postfix_run
+      dest: /etc/sv/postfix/run
+      owner: root
+      group: wheel
+      mode: '0755'
+  - name: add postfix config files
+    ansible.builtin.template:
+      src: '../../templates/postfix/{{ item }}'
+      dest: '/usr/local/etc/postfix/{{ item }}'
+      owner: root
+      group: wheel
+      mode: '0755'
+    loop:
+      - generic
+      - header_checks
+      - main.cf
+      - master.cf
+  - name: enable postfix boot
+    ansible.builtin.file:
+      src: /etc/sv/postfix
+      dest: /var/service/postfix
+      state: link
+  - name: reload postfix
+    community.general.runit:
+      name: postfix
+      state: reloaded

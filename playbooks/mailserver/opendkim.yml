@@ -1,0 +1,61 @@
+---
+
+- name: install and activate opendkim
+  hosts: pegasus.bayofrum.net
+  become: true
+  vars:
+    dkim_key: dkim20210211
+  tasks:
+  - name: install opendkim
+    pkgng:
+      name: opendkim
+  - name: add opendkim runsv directory
+    ansible.builtin.file:
+      path: /etc/sv/milteropendkim
+      state: directory
+      mode: '0755'
+  - name: add opendkim runsv file
+    ansible.builtin.template:
+      src: ../../templates/runit/milteropendkim_run
+      dest: /etc/sv/milteropendkim/run
+      owner: root
+      group: wheel
+      mode: '0755'
+  - name: configure opendkim
+    ansible.builtin.lineinfile:
+      dest: /usr/local/etc/mail/opendkim.conf
+      regexp: "{{ item.regexp }}"
+      line: "{{ item.line }}"
+    loop:
+      - { regexp: '^#? ?Canonicalization[[:space:]]', line: 'Canonicalization	relaxed/simple' }
+      - { regexp: '^#? ?Domain[[:space:]]', line: 'Domain	{{ ansible_nodename.split(".")[1:]|join(".") }}' }
+      - { regexp: '^#? ?Keyfile[[:space:]]', line: 'Keyfile	/var/db/dkim/{{ dkim_key }}.private' }
+      - { regexp: '^#? ?ReportAddress[[:space:]]', line: 'ReportAddress	"DKIM Error Postmaster postmaster@{{ ansible_nodename.split(".")[1:]|join(".") }}"' }
+      - { regexp: '^#? ?Selector[[:space:]]', line: 'Selector	{{ dkim_key }}' }
+      - { regexp: '^#? ?SendReports[[:space:]]', line: 'SendReports	yes' }
+      - { regexp: '^#? ?Socket[[:space:]]', line: 'Socket	inet:8891@localhost' }
+  - name: create domain keys dir
+    ansible.builtin.file:
+      path: /var/db/dkim
+      state: directory
+      owner: postfix
+      group: postfix
+      mode: 0700
+  - name: check signing keys
+    ansible.builtin.command:
+      creates: '/var/db/dkim/{{ dkim_key }}.private'
+      cmd: 'opendkim-genkey -b 1024 -d "{{ ansible_nodename.split(".")[1:]|join(".") }}" -D /var/db/dkim -s "{{ dkim_key }}" -v'
+  - name: check signing key permissions
+    ansible.builtin.file:
+      path: "/var/db/dkim/{{ dkim_key }}.{{ item.ext }}"
+      owner: postfix
+      group: postfix
+      mode: 0600
+    loop:
+      - { ext: 'private' }
+      - { ext: 'txt' }
+  - name: enable opendkim boot
+    ansible.builtin.file:
+      src: /etc/sv/milteropendkim
+      dest: /var/service/milteropendkim
+      state: link
