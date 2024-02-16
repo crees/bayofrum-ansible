@@ -21,6 +21,19 @@ all:
                     perseus.bayofrum.net:
                     heracles.bayofrum.net:
                     graeae.bayofrum.net:
+                    nova.bayofrum.net:
+                    zeus.bayofrum.net:
+    i386:
+      hosts:
+        nova.bayofrum.net:
+      children:
+        macbook:
+          hosts:
+            zeus.bayofrum.net:
+    jail:
+      hosts:
+        nc.bayofrum.net:
+        hass.bayofrum.net:
     linux:
       children:
         jellyfin:
