@@ -1,0 +1,13 @@
+---
+
+- name: install sysctl.conf
+  hosts: macbook
+  become: true
+  tasks:
+  - name: add macbook sysctl.conf
+    ansible.builtin.template:
+      src: '../../templates/sysctl.conf/macbook.conf'
+      dest: '/etc/sysctl.conf'
+      owner: root
+      group: wheel
+      mode: '0755'
