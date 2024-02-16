@@ -1,7 +1,7 @@
 ---
 
 - name: install workstation pkgs
-  hosts: workstation
+  hosts: workstation:!i386
   become: true
   tasks:
   - name: install workstation pkgs
