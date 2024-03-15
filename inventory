@@ -11,6 +11,7 @@ all:
               hosts:
                 pegasus.bayofrum.net:
                 nc.bayofrum.net:
+                hass.bayofrum.net:
             workstation:
               hosts:
                 hydra.bayofrum.net:
