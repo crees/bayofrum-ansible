@@ -18,6 +18,6 @@ Bootstrapping:
 > EOF
 # . /etc/periodic.conf
 # ansible-pull -vU https://github.com/$daily_ansible_pull_github_repo -i inventory bayofrum.yml
-# pkg set -v 1 pam_mkhomedir sssd-smb
+# pkg set -v 1 pam_mkhomedir sssd2
 ```
 
