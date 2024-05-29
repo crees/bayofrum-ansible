@@ -28,7 +28,7 @@
       line: "{{ item.line }}"
     loop:
       - { regexp: '^#? ?Canonicalization[[:space:]]', line: 'Canonicalization	relaxed/simple' }
-      - { regexp: '^#? ?Domain[[:space:]]', line: 'Domain	{{ ansible_nodename.split(".")[1:]|join(".") }}' }
+      - { regexp: '^#? ?Domain[[:space:]]', line: 'Domain	bayofrum.net,thistlecorner.net,rees.space' }
       - { regexp: '^#? ?Keyfile[[:space:]]', line: 'Keyfile	/var/db/dkim/{{ dkim_key }}.private' }
       - { regexp: '^#? ?ReportAddress[[:space:]]', line: 'ReportAddress	"DKIM Error Postmaster postmaster@{{ ansible_nodename.split(".")[1:]|join(".") }}"' }
       - { regexp: '^#? ?Selector[[:space:]]', line: 'Selector	{{ dkim_key }}' }
@@ -59,3 +59,4 @@
       src: /etc/sv/milteropendkim
       dest: /var/service/milteropendkim
       state: link
+#      - { regexp: '^#? ?Domain[[:space:]]', line: 'Domain	{{ ansible_nodename.split(".")[1:]|join(".") }}' }
