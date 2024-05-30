@@ -17,6 +17,7 @@ sysutils/fusefs-ntfs-compression
 sysutils/fusefs-sshfs
 www/chromium
 www/firefox
+x11-drivers/xf86-input-libinput
 x11-fonts/freefont-ttf
 x11-servers/xorg-server
 x11/kde5
