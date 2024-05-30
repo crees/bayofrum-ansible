@@ -18,10 +18,12 @@ all:
               children:
                 laptop:
                   hosts:
+                    athene.bayofrum.net:
                     perseus.bayofrum.net:
                     heracles.bayofrum.net:
                     graeae.bayofrum.net:
                     nova.bayofrum.net:
+                    zelda.bayofrum.net:
                     zeus.bayofrum.net:
     i386:
       hosts:
