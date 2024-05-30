@@ -6,7 +6,7 @@
   tasks:
   - name: install sssd
     pkgng:
-      name: sssd-smb pam_mkhomedir
+      name: sssd2 pam_mkhomedir
   - name: configure sssd
     ansible.builtin.template:
       src: ../../templates/sssd.conf
