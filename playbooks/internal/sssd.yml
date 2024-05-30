@@ -38,11 +38,14 @@
       replace: '\1: files sss'
   - name: configure pam for sssd
     ansible.builtin.template:
-      src: ../../templates/pam.d/system
-      dest: /etc/pam.d/system
+      src: "../../templates/pam.d/{{ item }}"
+      dest: "/etc/pam.d/{{ item }}"
       owner: root
       group: wheel
       mode: '0644'
+    loop:
+      - system
+      - sshd
   - name: remove selected builtin groups
     ansible.builtin.lineinfile:
       line: '{{ item }}'
