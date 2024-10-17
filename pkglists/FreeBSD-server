@@ -76,7 +76,6 @@ net-p2p/transmission-cli
 net-p2p/transmission-daemon
 net-p2p/transmission-utils
 net/isc-dhcp44-server
-net/mosquitto
 net/nss_ldap
 net/onedrive
 net/openldap26-server
