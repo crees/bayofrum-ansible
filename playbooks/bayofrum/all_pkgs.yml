@@ -5,5 +5,5 @@
   become: true
   tasks:
   - name: install relevant pkgs
-    pkgng:
+    community.general.pkgng:
       name: "{{ lookup('file', '../../pkglists/FreeBSD') }}"
