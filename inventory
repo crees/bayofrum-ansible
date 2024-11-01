@@ -8,9 +8,11 @@ all:
         internal:
           children:
             server:
-              hosts:
-                pegasus.bayofrum.net:
-                nc.bayofrum.net:
+              children:
+                webserver:
+                  hosts:
+                    pegasus.bayofrum.net:
+                    nc.bayofrum.net:
               children:
                 homeassistant:
                   hosts:
