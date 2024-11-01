@@ -1,6 +1,4 @@
-#
-#
-# PAM configuration for the "sshd" service
+# PAM configuration for the "sshd" service with SSSD
 #
 
 # auth

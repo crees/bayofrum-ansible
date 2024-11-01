@@ -1,7 +1,4 @@
-#
-# $FreeBSD$
-#
-# System-wide defaults
+# System-wide defaults with SSSD
 #
 
 # auth
