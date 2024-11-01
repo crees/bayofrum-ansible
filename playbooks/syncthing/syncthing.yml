@@ -1,7 +1,7 @@
 ---
 
 - name: install and activate syncthing
-  hosts: internal
+  hosts: pegasus.bayofrum.net
   vars:
     srv: syncthing
   become: true
