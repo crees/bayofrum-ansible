@@ -11,24 +11,38 @@
       owner: root
       group: wheel
       mode: '0755'
-  - name: install dshs repo
+#  - name: install dshs repo
+#    ansible.builtin.template:
+#      src: ../../templates/pkg_repos/dshs.conf
+#      dest: /usr/local/etc/pkg/repos/dshs.conf
+#      owner: root
+#      group: wheel
+#      mode: '0644'
+#  - name: install dshs-base repo
+#    ansible.builtin.template:
+#      src: ../../templates/pkg_repos/dshs-base.conf
+#      dest: /usr/local/etc/pkg/repos/dshs-base.conf
+#      owner: root
+#      group: wheel
+#      mode: '0644'
+  - name: install pegasus repo
     ansible.builtin.template:
-      src: ../../templates/pkg_repos/dshs.conf
-      dest: /usr/local/etc/pkg/repos/dshs.conf
+      src: ../../templates/pkg_repos/pegasus.conf
+      dest: /usr/local/etc/pkg/repos/pegasus.conf
       owner: root
       group: wheel
       mode: '0644'
-  - name: install dshs-base repo
+  - name: install pegasus-base repo
     ansible.builtin.template:
-      src: ../../templates/pkg_repos/dshs-base.conf
-      dest: /usr/local/etc/pkg/repos/dshs-base.conf
+      src: ../../templates/pkg_repos/pegasus-base.conf
+      dest: /usr/local/etc/pkg/repos/pegasus-base.conf
       owner: root
       group: wheel
       mode: '0644'
-  - name: remove pegasus repos
-    ansible.builtin.file:
-      path: '/usr/local/etc/pkg/repos/{{ item }}.conf'
-      state: absent
-    loop:
-      - pegasus
-      - pegasus-base
+#  - name: remove pegasus repos
+#    ansible.builtin.file:
+#      path: '/usr/local/etc/pkg/repos/{{ item }}.conf'
+#      state: absent
+#    loop:
+#      - pegasus
+#      - pegasus-base
