@@ -11,7 +11,10 @@ all:
               hosts:
                 pegasus.bayofrum.net:
                 nc.bayofrum.net:
-                hass.bayofrum.net:
+              children:
+                homeassistant:
+                  hosts:
+                    hass.bayofrum.net:
             workstation:
               hosts:
                 hydra.bayofrum.net:

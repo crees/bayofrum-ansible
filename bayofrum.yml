@@ -31,4 +31,5 @@
 #- ansible.builtin.import_playbook: playbooks/nextcloud/redis.yml
 #- ansible.builtin.import_playbook: playbooks/nextcloud/onlyoffice.yml
 - ansible.builtin.import_playbook: playbooks/mailserver/roundcube.yml
+- ansible.builtin.import_playbook: playbooks/homeassistant/hass_pkg.yml
 - ansible.builtin.import_playbook: linux.yml

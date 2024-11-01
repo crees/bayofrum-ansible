@@ -1,0 +1,5 @@
+databases/py-sqlite3
+devel/cmake-core
+devel/py-pyproject_hooks
+graphics/jpeg-turbo
+multimedia/ffmpeg

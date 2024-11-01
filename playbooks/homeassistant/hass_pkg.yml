@@ -1,0 +1,9 @@
+---
+
+- name: install relevant pkgs
+  hosts: homeassistant
+  become: true
+  tasks:
+  - name: install relevant pkgs
+    community.general.pkgng:
+      name: "{{ lookup('file', '../../pkglists/FreeBSD-homeassistant') }}"
