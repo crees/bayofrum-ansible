@@ -31,10 +31,4 @@
 #- ansible.builtin.import_playbook: playbooks/nextcloud/redis.yml
 #- ansible.builtin.import_playbook: playbooks/nextcloud/onlyoffice.yml
 - ansible.builtin.import_playbook: playbooks/mailserver/roundcube.yml
-#- ansible.builtin.import_playbook: playbooks/linux/apache24.yml
-#- ansible.builtin.import_playbook: playbooks/linux/krb5-server.yml
-#- ansible.builtin.import_playbook: playbooks/linux/autofs.yml
-#- ansible.builtin.import_playbook: playbooks/linux/git.yml
-#- ansible.builtin.import_playbook: playbooks/linux/bluetooth_le_scanner.yml
-#- ansible.builtin.import_playbook: playbooks/linux/runit.yml
-#- ansible.builtin.import_playbook: playbooks/linux/named.yml
+- ansible.builtin.import_playbook: linux.yml

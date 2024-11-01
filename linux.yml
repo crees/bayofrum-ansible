@@ -1,0 +1,9 @@
+---
+
+- ansible.builtin.import_playbook: playbooks/linux/apache24.yml
+- ansible.builtin.import_playbook: playbooks/linux/krb5-server.yml
+- ansible.builtin.import_playbook: playbooks/linux/autofs.yml
+- ansible.builtin.import_playbook: playbooks/linux/git.yml
+- ansible.builtin.import_playbook: playbooks/linux/bluetooth_le_scanner.yml
+- ansible.builtin.import_playbook: playbooks/linux/runit.yml
+- ansible.builtin.import_playbook: playbooks/linux/named.yml
