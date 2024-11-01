@@ -27,7 +27,7 @@
       regexp: "{{ item.regexp }}"
       line: "{{ item.line }}"
     loop:
-      - { regexp: '^#?pid_file /var/run/mosquitto.pid', line: 'pid_file /var/run/mosquitto.pid' }
+      - { regexp: '^#?pid_file', line: '#pid_file /var/run/mosquitto.pid' }
       - { regexp: '^#?listener', line: 'listener 1883 mosquitto.bayofrum.net' }
       - { regexp: '^#?password_file', line: 'password_file /usr/local/etc/mosquitto/pwfile' }
   - name: enable {{ srv }} boot
