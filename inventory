@@ -15,6 +15,9 @@ all:
                 homeassistant:
                   hosts:
                     hass.bayofrum.net:
+                mosquitto:
+                  hosts:
+                    mosquitto.bayofrum.net:
             workstation:
               hosts:
                 hydra.bayofrum.net:
