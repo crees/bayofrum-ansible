@@ -13,7 +13,6 @@ all:
                   hosts:
                     pegasus.bayofrum.net:
                     nc.bayofrum.net:
-              children:
                 homeassistant:
                   hosts:
                     hass.bayofrum.net:
