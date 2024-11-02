@@ -75,6 +75,7 @@ net-mgmt/adcli
 net-p2p/transmission-cli
 net-p2p/transmission-daemon
 net-p2p/transmission-utils
+net/get_iplayer
 net/isc-dhcp44-server
 net/nss_ldap
 net/onedrive
@@ -84,7 +85,7 @@ net/php81-ldap
 net/php81-soap
 net/poptop
 net/rsync
-net/samba413
+net/samba416
 net/syncthing
 net/tightvnc
 net/wol

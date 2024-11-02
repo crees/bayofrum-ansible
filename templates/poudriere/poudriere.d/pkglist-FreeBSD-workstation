@@ -3,9 +3,10 @@ editors/libreoffice
 editors/vim
 emulators/libc6-shim
 emulators/wine
+finance/gnucash
 graphics/drm-kmod
 graphics/gimp
-graphics/intel-backlight
+graphics/xpdf
 java/eclipse
 mail/thunderbird
 net/syncthing
