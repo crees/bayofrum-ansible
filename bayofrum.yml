@@ -11,6 +11,7 @@
 - ansible.builtin.import_playbook: playbooks/bayofrum/cron.yml
 - ansible.builtin.import_playbook: playbooks/internal/sssd.yml
 
+- ansible.builtin.import_playbook: playbooks/package_builder/poudriere.yml
 - ansible.builtin.import_playbook: playbooks/webserver/apache24.yml
 - ansible.builtin.import_playbook: playbooks/webserver/mysql-server.yml
 #- ansible.builtin.import_playbook: playbooks/grist/grist.yml

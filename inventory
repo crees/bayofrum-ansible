@@ -27,6 +27,9 @@ all:
                 mail:
                   hosts:
                     mail.bayofrum.net:
+                package_builder:
+                  hosts:
+                    pegasus.bayofrum.net:
             workstation:
               children:
                 laptop:
