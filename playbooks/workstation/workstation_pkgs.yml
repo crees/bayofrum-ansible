@@ -6,4 +6,4 @@
   tasks:
   - name: install workstation pkgs
     pkgng:
-      name: "{{ lookup('file', '../../pkglists/FreeBSD-workstation') }}"
+      name: "{{ lookup('file', '../../templates/poudriere/poudriere.d/pkglist-FreeBSD-workstation') }}"

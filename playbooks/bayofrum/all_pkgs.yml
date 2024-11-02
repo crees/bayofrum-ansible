@@ -6,4 +6,4 @@
   tasks:
   - name: install relevant pkgs
     community.general.pkgng:
-      name: "{{ lookup('file', '../../pkglists/FreeBSD') }}"
+      name: "{{ lookup('file', '../../templates/poudriere/poudriere.d/pkglist-FreeBSD') }}"

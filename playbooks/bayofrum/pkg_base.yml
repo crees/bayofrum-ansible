@@ -10,4 +10,4 @@
   - name: upgrade FreeBSD base
     ansible.builtin.script:
       creates: '/var/db/ansible/pkg_base/serial/{{ srl }}'
-      cmd: ../../scripts/FreeBSD-base-upgrade '{{ srl }}' FreeBSD:13:amd64 13.1 '{{ basepkg_list }}'
+      cmd: ../../scripts/FreeBSD-base-upgrade '{{ srl }}' FreeBSD:14:amd64 14.1 '{{ basepkg_list }}'
