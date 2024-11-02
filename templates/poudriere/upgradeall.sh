@@ -62,10 +62,12 @@ mkpjail() {
 }
 
 bulkjail() {
-	local _jail
+	local _jail _pkglists
 	_jail=$1
 
-	$poudriere bulk -j $_jail -p default -f /usr/local/etc/poudriere.d/pkglist-bayofrum -f /usr/local/etc/poudriere.d/pkglist-desktop -f /usr/local/etc/poudriere.d/pkglist-server
+	_pkglists=$(echo /usr/local/etc/poudriere.d/pkglist-FreeBSD* | sed 's, , -f ,g')
+
+	$poudriere bulk -j $_jail -p default -f $_pkglists
 }
 
 if [ ! -e /nobuildeverything ]; then
