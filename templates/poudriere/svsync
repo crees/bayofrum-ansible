@@ -1,0 +1,45 @@
+#!/bin/sh
+
+svn=/usr/local/bin/svn
+git=/usr/local/bin/git
+svnsync=/usr/local/bin/svnsync
+
+[ -n "$1" ] && debug=" "
+
+debug=${1+" "}
+
+debug()
+{
+	if [ -n "$debug" ]; then
+		echo "$*";
+	fi
+}
+
+quiet=${debug:--q }
+
+#for repo in ports doc; do
+#	debug Updating $repo...
+#	$svnsync sync file:////exports/freebsd-svn/$repo >/dev/null
+#	debug "[$repo complete]"
+#done
+
+#for dir in ports doc; do
+#	cd /usr/$dir && $svn $quiet up
+#done
+
+# Really no need for this
+#cd /usr/ports/machines/bayofrum && make -s bump-version
+
+# Don't clobber already building systems...
+
+pgrep -qf upgradeall.sh && exit 0
+
+cd /exports/src
+for dir in [a-z0-9]*; do
+	(cd $dir && $git pull --ff-only --quiet)
+done
+
+cd /fast/ports && su crees -c "$git pull --ff-only --quiet"
+
+cd /root/upgradeall
+exec sh upgradeall.sh
