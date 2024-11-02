@@ -1,7 +1,7 @@
 ---
 
 - name: install and configure openemr
-  hosts: pegasus.bayofrum.net
+  hosts: none
   become: true
   vars:
     location: /usr/local/www/data/openemr
