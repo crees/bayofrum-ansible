@@ -28,7 +28,6 @@
       - /fast/poudriere/ccache
       - /space/poudriere_data/packages
       - /space/poudriere_data/packages/pkgbase
-      - /space/poudriere_data/scripts
   - name: copy script for periodic running
     ansible.builtin.template:
       src: "../../templates/poudriere/{{ item.src }}"
