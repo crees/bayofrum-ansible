@@ -52,5 +52,5 @@
       dest: '{{ item.dest }}'
       state: link
     loop:
-      - { src: /space/poudriere_data/packages, dest: /usr/local/www/data/pkg_download }
+      - { src: /space/poudriere_data/packages, dest: /usr/local/www/data/pkg-download }
       - { src: /space/poudriere_data/logs/bulk, dest: /usr/local/www/data/pkg }
