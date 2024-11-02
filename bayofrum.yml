@@ -15,14 +15,6 @@
 - ansible.builtin.import_playbook: playbooks/webserver/mysql-server.yml
 #- ansible.builtin.import_playbook: playbooks/grist/grist.yml
 #- ansible.builtin.import_playbook: playbooks/jailer/jail.yml
-- ansible.builtin.import_playbook: playbooks/workstation/webcamd.yml
-- ansible.builtin.import_playbook: playbooks/workstation/boot_loader_conf.yml
-- ansible.builtin.import_playbook: playbooks/workstation/cups.yml
-- ansible.builtin.import_playbook: playbooks/workstation/sddm.yml
-- ansible.builtin.import_playbook: playbooks/workstation/graphics_load.yml
-- ansible.builtin.import_playbook: playbooks/workstation/dbus.yml
-- ansible.builtin.import_playbook: playbooks/workstation/consolekit.yml
-- ansible.builtin.import_playbook: playbooks/workstation/workstation_pkgs.yml
 - ansible.builtin.import_playbook: playbooks/macbook/macbook.yml
 - ansible.builtin.import_playbook: playbooks/syncthing/syncthing.yml
 - ansible.builtin.import_playbook: playbooks/openemr/openemr.yml
@@ -32,4 +24,5 @@
 #- ansible.builtin.import_playbook: playbooks/nextcloud/onlyoffice.yml
 - ansible.builtin.import_playbook: playbooks/mailserver/roundcube.yml
 - ansible.builtin.import_playbook: playbooks/homeassistant/hass_pkg.yml
+- ansible.builtin.import_playbook: workstation.yml
 - ansible.builtin.import_playbook: linux.yml
