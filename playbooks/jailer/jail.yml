@@ -18,7 +18,9 @@
       mode: '0644'
     loop:
       - 'nc.conf'
-      - 'hass.conf'
+      - 'hass14.conf'
+      - 'mail.conf'
+      - 'mosquitto.conf'
   - name: enable jail rc.conf
     community.general.sysrc:
       name: 'jail_enable'
@@ -37,6 +39,8 @@
     loop:
       - { alias: '0', ip: '192.168.1.51' }
       - { alias: '1', ip: '192.168.1.52' }
+      - { alias: '3', ip: '192.168.1.53' }
+      - { alias: '4', ip: '192.168.1.54' }
   - name: start jail
     ansible.builtin.service:
       name: jail
