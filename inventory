@@ -44,8 +44,10 @@ all:
             zeus.bayofrum.net:
     jail:
       hosts:
-        nc.bayofrum.net:
         hass.bayofrum.net:
+        mail.bayofrum.net:
+        mosquitto.bayofrum.net:
+        nc.bayofrum.net:
     linux:
       children:
         jellyfin:
