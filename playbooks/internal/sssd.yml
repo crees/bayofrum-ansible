@@ -1,7 +1,8 @@
 ---
 
 - name: install and activate sssd
-  hosts: internal
+  # Can't do Pegasus as will screw up the SSHD google authenticator
+  hosts: internal:!pegasus.bayofrum.net
   become: true
   tasks:
   - name: install sssd
