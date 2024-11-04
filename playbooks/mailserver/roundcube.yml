@@ -6,7 +6,7 @@
   tasks:
   - name: install roundcube
     pkgng:
-      name: roundcube-php80
+      name: roundcube-php81
   - name: enable roundcube alias
     ansible.builtin.template:
       src: "{{ item.src }}"
