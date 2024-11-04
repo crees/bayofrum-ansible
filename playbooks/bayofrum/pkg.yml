@@ -25,6 +25,13 @@
 #      owner: root
 #      group: wheel
 #      mode: '0644'
+  - name: Disable FreeBSD repo
+    ansible.builtin.template:
+      src: ../../templates/pkg_repos/FreeBSD.conf
+      dest: /usr/local/etc/pkg/repos/FreeBSD.conf
+      owner: root
+      group: wheel
+      mode: '0644'
   - name: install pegasus repo
     ansible.builtin.template:
       src: ../../templates/pkg_repos/pegasus.conf
