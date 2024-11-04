@@ -19,6 +19,9 @@ all:
                 mosquitto:
                   hosts:
                     mosquitto.bayofrum.net:
+                mail:
+                  hosts:
+                    mail.bayofrum.net:
             workstation:
               hosts:
                 hydra.bayofrum.net:
