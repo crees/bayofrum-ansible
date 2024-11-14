@@ -5,8 +5,10 @@ editors/vim
 emulators/libc6-shim
 emulators/wine
 finance/gnucash
+games/lwjgl
 graphics/drm-kmod
 graphics/gimp
+graphics/glfw
 graphics/xpdf
 java/eclipse
 mail/thunderbird
