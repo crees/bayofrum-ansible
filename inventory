@@ -11,8 +11,11 @@ all:
               children:
                 webserver:
                   hosts:
-                    pegasus.bayofrum.net:
                     nc.bayofrum.net:
+                  children:
+                    package_builder:
+                      hosts:
+                        pegasus.bayofrum.net:
                 homeassistant:
                   hosts:
                     hass.bayofrum.net:
