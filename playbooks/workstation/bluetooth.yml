@@ -1,0 +1,48 @@
+---
+
+- name: run hcsecd and bthidd
+  hosts: workstation
+  become: true
+  tasks:
+  - name: add bluetooth services runsv directory
+    ansible.builtin.file:
+      path: '/etc/sv/{{ item }}'
+      state: directory
+      mode: '0755'
+    loop:
+      - bthidd
+      - hcsecd
+  - name: add bluetooth services runsv file
+    ansible.builtin.template:
+      src: '../../templates/runit/{{ item }}_run'
+      dest: '/etc/sv/{{ item }}/run'
+      owner: root
+      group: wheel
+      mode: '0755'
+    loop:
+      - bthidd
+      - hcsecd
+  - name: enable bluetooth services boot
+    ansible.builtin.file:
+      src: '/etc/sv/{{ item }}'
+      dest: '/var/service/{{ item }}'
+      state: link
+    loop:
+      - bthidd
+      - hcsecd
+  - name: disable bluetooth services rc.conf
+    community.general.sysrc:
+      name: '{{ item }}_enable'
+      value: "no"
+    register: sysrc
+    loop:
+      - bthidd
+      - hcsecd
+  - name: kill bluetooth services for runit takeover
+    ansible.builtin.service:
+      name: '{{ item }}'
+      state: stopped
+    when: sysrc.changed
+    loop:
+      - bthidd
+      - hcsecd

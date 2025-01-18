@@ -1,0 +1,4 @@
+#!/bin/sh
+sv start hcsecd || exit 1
+kldload -n uinput kbdmux vkbd ng_btsocket
+exec /usr/sbin/bthidd -du
