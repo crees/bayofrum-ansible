@@ -5,6 +5,7 @@ editors/libreoffice
 editors/vim
 emulators/libc6-shim
 emulators/wine
+emulators/wine-proton
 finance/gnucash
 games/lwjgl
 graphics/drm-kmod
