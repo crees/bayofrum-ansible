@@ -1,0 +1,23 @@
+---
+
+- name: activate Samba domain controller
+  hosts: dc.bayofrum.net
+  become: true
+  tasks:
+  - name: add samba runsv directory
+    ansible.builtin.file:
+      path: /etc/sv/samba
+      state: directory
+      mode: '0755'
+  - name: add samba runsv file
+    ansible.builtin.template:
+      src: ../../templates/runit/samba_run
+      dest: /etc/sv/samba/run
+      owner: root
+      group: wheel
+      mode: '0755'
+  - name: enable samba boot
+    ansible.builtin.file:
+      src: /etc/sv/samba
+      dest: /var/service/samba
+      state: link
