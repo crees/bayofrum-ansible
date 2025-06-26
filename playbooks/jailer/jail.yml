@@ -17,6 +17,7 @@
       group: wheel
       mode: '0644'
     loop:
+      - 'dc.conf'
       - 'nc.conf'
       - 'hass14.conf'
       - 'mail.conf'
@@ -37,8 +38,9 @@
       name: 'ifconfig_re0_alias{{ item.alias }}'
       value: 'inet {{ item.ip }} netmask 255.255.255.0'
     loop:
-      - { alias: '0', ip: '192.168.1.51' }
-      - { alias: '1', ip: '192.168.1.52' }
+      - { alias: '0', ip: '192.168.1.50' }
+      - { alias: '1', ip: '192.168.1.51' }
+      - { alias: '2', ip: '192.168.1.52' }
       - { alias: '3', ip: '192.168.1.53' }
       - { alias: '4', ip: '192.168.1.54' }
   - name: start jail
