@@ -1,5 +1,3 @@
----
-
 - name: install sudo
   hosts: bayofrum
   become: true
@@ -12,5 +10,12 @@
       commands: ALL
       name: staff_nopasswd
       group: staff
+      nopassword: true
+      sudoers_path: /usr/local/etc/sudoers.d
+  - name: enable Domain Admins nopasswd
+    community.general.sudoers:
+      commands: ALL
+      name: domain_admins_nopasswd
+      group: 'domain\ admins'
       nopassword: true
       sudoers_path: /usr/local/etc/sudoers.d
