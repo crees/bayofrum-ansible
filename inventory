@@ -8,6 +8,8 @@ all:
         internal:
           children:
             server:
+              hosts:
+                dc.bayofrum.net:
               children:
                 webserver:
                   hosts:
