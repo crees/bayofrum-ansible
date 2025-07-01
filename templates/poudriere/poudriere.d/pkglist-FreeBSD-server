@@ -28,6 +28,9 @@ devel/py-pip
 devel/rclint
 devel/rcs
 devel/subversion
+databases/pecl-memcached
+databases/pecl-redis
+databases/redis
 dns/bind918
 dns/namesilo_ddns
 editors/vim
