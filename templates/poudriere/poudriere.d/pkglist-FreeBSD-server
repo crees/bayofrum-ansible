@@ -60,7 +60,7 @@ mail/mutt
 mail/opendkim
 mail/opendmarc
 mail/php83-imap
-mail/postfix-sasl
+mail/postfix@sasl
 mail/postfix-policyd-spf-perl
 mail/roundcube
 math/blas
