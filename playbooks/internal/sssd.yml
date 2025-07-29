@@ -47,14 +47,6 @@
     loop:
       - system
       - sshd
-  - name: remove selected builtin groups
-    ansible.builtin.lineinfile:
-      line: '{{ item }}'
-      path: /etc/group
-      state: absent
-    loop:
-      - 'staff:*:20:'
-      - 'video:*:44:'
   - name: remove DNS reliance
     ansible.builtin.template:
       src: "../../templates/krb5.conf"
