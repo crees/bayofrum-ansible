@@ -3,7 +3,7 @@
 srcdir=/exports/src
 # Need the -pegasus suffix or Poudriere uses builtin manifests
 # and refuses to use our tarballs
-srcvers="releng-14.2:14.2-RELEASE-pegasus"
+srcvers="releng-14.3:14.3-RELEASE-pegasus"
 archs=${1:-"amd64"}
 
 poudriere=/usr/local/bin/poudriere
