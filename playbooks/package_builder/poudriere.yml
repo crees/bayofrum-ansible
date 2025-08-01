@@ -41,6 +41,7 @@
       - { src: poudriere.d/make.conf, dest: /usr/local/etc/poudriere.d/make.conf }
       - { src: poudriere_cron, dest: /etc/cron.d/poudriere }
       - { src: poudriere.d/pkglist-FreeBSD, dest: /usr/local/etc/poudriere.d/pkglist-FreeBSD }
+      - { src: poudriere.d/pkglist-FreeBSD-elgar, dest: /usr/local/etc/poudriere.d/pkglist-FreeBSD-elgar }
       - { src: poudriere.d/pkglist-FreeBSD-homeassistant, dest: /usr/local/etc/poudriere.d/pkglist-FreeBSD-homeassistant }
       - { src: poudriere.d/pkglist-FreeBSD-matrix, dest: /usr/local/etc/poudriere.d/pkglist-FreeBSD-matrix }
       - { src: poudriere.d/pkglist-FreeBSD-mosquitto, dest: /usr/local/etc/poudriere.d/pkglist-FreeBSD-mosquitto }

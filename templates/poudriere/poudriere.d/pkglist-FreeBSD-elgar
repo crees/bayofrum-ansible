@@ -1,0 +1,6 @@
+mail/mlmmj
+databases/php83-pdo_sqlite
+databases/pecl-memcached
+databases/pecl-redis
+databases/redis
+www/yarn-node18
