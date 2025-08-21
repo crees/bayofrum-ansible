@@ -54,6 +54,7 @@ all:
         mail.bayofrum.net:
         mosquitto.bayofrum.net:
         nc.bayofrum.net:
+        photos.bayofrum.net:
     linux:
       children:
         jellyfin:

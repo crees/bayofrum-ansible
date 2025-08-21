@@ -22,6 +22,7 @@
       - 'hass14.conf'
       - 'mail.conf'
       - 'mosquitto.conf'
+      - 'photos.conf'
   - name: enable jail rc.conf
     community.general.sysrc:
       name: 'jail_enable'
@@ -33,16 +34,16 @@
 #      value_present: '{{ item }}'
 #    loop:
 #      - nc
-  - name: enable aliases
-    community.general.sysrc:
-      name: 'ifconfig_re0_alias{{ item.alias }}'
-      value: 'inet {{ item.ip }} netmask 255.255.255.0'
-    loop:
-      - { alias: '0', ip: '192.168.1.50' }
-      - { alias: '1', ip: '192.168.1.51' }
-      - { alias: '2', ip: '192.168.1.52' }
-      - { alias: '3', ip: '192.168.1.53' }
-      - { alias: '4', ip: '192.168.1.54' }
+#  - name: enable aliases
+#    community.general.sysrc:
+#      name: 'ifconfig_re0_alias{{ item.alias }}'
+#      value: 'inet {{ item.ip }} netmask 255.255.255.0'
+#    loop:
+#      - { alias: '0', ip: '192.168.1.50' }
+#      - { alias: '1', ip: '192.168.1.51' }
+#      - { alias: '2', ip: '192.168.1.52' }
+#      - { alias: '3', ip: '192.168.1.53' }
+#      - { alias: '4', ip: '192.168.1.54' }
   - name: start jail
     ansible.builtin.service:
       name: jail
