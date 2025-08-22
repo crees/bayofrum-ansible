@@ -8,7 +8,7 @@
   tasks:
   - name: install {{ srv }}
     pkgng:
-      name: '{{ srv }} mod_php83 ap24-mod_authnz_external24 ap24-mod_authz_unixgroup24'
+      name: '{{ srv }} mod_php83 php83 ap24-mod_authnz_external24 ap24-mod_authz_unixgroup24'
   - name: enable php and authz_external
     ansible.builtin.template:
       src: "{{ item.src }}"
