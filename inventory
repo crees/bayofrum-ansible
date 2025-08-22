@@ -14,6 +14,7 @@ all:
                 webserver:
                   hosts:
                     nc.bayofrum.net:
+                    photos.bayofrum.net:
                   children:
                     package_builder:
                       hosts:
