@@ -65,7 +65,9 @@ bulkjail() {
 	local _jail _pkglists
 	_jail=$1
 
-	_pkglists=$(echo /usr/local/etc/poudriere.d/pkglist-FreeBSD* | sed 's, , -f ,g')
+	for f in /usr/local/etc/poudriere.d/pkglist-FreeBSD*; do
+		_pkglists="${_pkglists+$_pkglists }-f $f"
+	done
 
 	$poudriere bulk -j $_jail -p default -f $_pkglists
 }
