@@ -1,0 +1,5 @@
+databases/postgresql17-contrib
+databases/postgresql17-server
+databases/redis
+graphics/vips
+www/npm-node20
