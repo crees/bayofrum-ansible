@@ -73,7 +73,6 @@ misc/py-icoextract
 misc/terminfo-db
 multimedia/atomicparsley
 multimedia/get_iplayer
-multimedia/snapcast
 multimedia/webcamd
 net-mgmt/adcli
 net-p2p/transmission-components@cli
