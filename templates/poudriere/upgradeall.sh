@@ -69,7 +69,7 @@ bulkjail() {
 		_pkglists="${_pkglists+$_pkglists }-f $f"
 	done
 
-	$poudriere bulk -j $_jail -p default -f $_pkglists
+	$poudriere bulk -j $_jail -p default -f $_pkglists -b quarterly
 }
 
 if [ ! -e /nobuildeverything ]; then
