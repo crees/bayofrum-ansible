@@ -8,7 +8,11 @@
   tasks:
   - name: install {{ srv }}
     pkgng:
-      name: '{{ srv }} mod_php83 php83 ap24-mod_authnz_external24 ap24-mod_authz_unixgroup24'
+      name: '{{ srv }} php83 ap24-mod_authnz_external24 ap24-mod_authz_unixgroup24'
+  - name: remove mod_php
+    pkgng:
+      name: mod_php83
+      state: absent
   - name: enable php and authz_external
     ansible.builtin.template:
       src: "{{ item.src }}"
@@ -17,9 +21,13 @@
       group: wheel
       mode: '0644'
     loop:
-      - { src: '../../templates/apache24/modules.d/100_php.conf', dest: '/usr/local/etc/apache24/modules.d/100_php.conf' }
+      - { src: '../../templates/apache24/modules.d/001_php-fpm.conf', dest: '/usr/local/etc/apache24/modules.d/001_php-fpm.conf' }
       - { src: '../../templates/apache24/modules.d/101_authnz_external.conf', dest: '/usr/local/etc/apache24/modules.d/101_authnz_external.conf' }
       - { src: '../../templates/pam.d/pwauth', dest: '/usr/local/etc/pam.d/pwauth' }
+  - name: remove mod_php
+    ansible.builtin.file:
+      path: /usr/local/etc/apache24/modules.d/100_php.conf
+      state: absent
   - name: make php ini file
     ansible.builtin.file:
       path: /usr/local/etc/php.ini
@@ -41,21 +49,30 @@
       - { regexp: '^opcache.interned_strings_buffer', line: 'opcache.interned_strings_buffer = 32' }
   - name: add {{ srv }} runsv directory
     ansible.builtin.file:
-      path: '/etc/sv/{{ srv }}'
+      path: '/etc/sv/{{ item }}'
       state: directory
       mode: '0755'
+    loop:
+      - '{{ srv }}'
+      - php-fpm
   - name: add {{ srv }} runsv file
     ansible.builtin.template:
-      src: '../../templates/runit/{{ srv }}_run'
-      dest: '/etc/sv/{{ srv }}/run'
+      src: '../../templates/runit/{{ item }}_run'
+      dest: '/etc/sv/{{ item }}/run'
       owner: root
       group: wheel
       mode: '0755'
+    loop:
+      - '{{ srv }}'
+      - php-fpm
   - name: enable {{ srv }} boot
     ansible.builtin.file:
-      src: '/etc/sv/{{ srv }}'
-      dest: '/var/service/{{ srv }}'
+      src: '/etc/sv/{{ item }}'
+      dest: '/var/service/{{ item }}'
       state: link
+    loop:
+      - '{{ srv }}'
+      - php-fpm
   - name: reload Apache
     community.general.runit:
       name: apache24
