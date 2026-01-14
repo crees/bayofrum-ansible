@@ -7,36 +7,36 @@
   - name: install required PHP modules
     pkgng:
       name:
-        - php83-ctype
-        - php83-curl
-        - php83-dom
-        - php83-filter
-        - php83-fileinfo
-        - php83-gd
-        - php83-xml
-        - php83-mbstring
-        - php83-opcache
-        - php83-posix
-        - php83-session
-        - php83-simplexml
-        - php83-sysvsem
-        - php83-xmlreader
-        - php83-xmlwriter
-        - php83-zip
-        - php83-zlib
-        - php83-pdo_mysql
-        - php83-bz2
-        - php83-intl
-        - php83-sodium
-        - php83-ldap
-        - php83-ftp
-        - php83-imap
-        - php83-bcmath
-        - php83-gmp
-        - php83-exif
-        - php83-pecl-APCu
-        - php83-pecl-redis
-        - php83-pecl-imagick
+        - php84-ctype
+        - php84-curl
+        - php84-dom
+        - php84-filter
+        - php84-fileinfo
+        - php84-gd
+        - php84-xml
+        - php84-mbstring
+        - php84-opcache
+        - php84-posix
+        - php84-session
+        - php84-simplexml
+        - php84-sysvsem
+        - php84-xmlreader
+        - php84-xmlwriter
+        - php84-zip
+        - php84-zlib
+        - php84-pdo_mysql
+        - php84-bz2
+        - php84-intl
+        - php84-sodium
+        - php84-ldap
+        - php84-ftp
+        - php84-imap
+        - php84-bcmath
+        - php84-gmp
+        - php84-exif
+        - php84-pecl-APCu
+        - php84-pecl-redis
+        - php84-pecl-imagick
   - name: add cronjob
     ansible.builtin.template:
       src: '../../templates/cron.d/nextcloud'
