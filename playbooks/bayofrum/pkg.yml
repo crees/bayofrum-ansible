@@ -46,7 +46,7 @@
       owner: root
       group: wheel
       mode: '0644'
-  - name: remove pegasus repos
+  - name: remove dshs repos
     ansible.builtin.file:
       path: '/usr/local/etc/pkg/repos/{{ item }}.conf'
       state: absent
