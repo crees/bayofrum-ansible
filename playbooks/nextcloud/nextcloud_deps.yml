@@ -30,7 +30,6 @@
         - php84-sodium
         - php84-ldap
         - php84-ftp
-        - php84-imap
         - php84-bcmath
         - php84-gmp
         - php84-exif
