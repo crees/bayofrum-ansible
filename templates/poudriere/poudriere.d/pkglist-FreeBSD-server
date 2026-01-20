@@ -59,7 +59,6 @@ mail/mailscanner
 mail/mutt
 mail/opendkim
 mail/opendmarc
-mail/php84-imap
 mail/postfix@sasl
 mail/postfix-policyd-spf-perl
 mail/roundcube
@@ -134,7 +133,7 @@ www/apache24
 www/jitsi-meet
 www/mod_authnz_external24
 www/mod_authz_unixgroup24
-www/mod_wsgi4
+www/mod_wsgi
 www/npm
 www/onlyoffice-documentserver
 www/php84-opcache
