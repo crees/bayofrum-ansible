@@ -11,6 +11,9 @@ all:
               hosts:
                 dc.bayofrum.net:
               children:
+                database:
+                  hosts:
+                    db.bayofrum.net:
                 webserver:
                   hosts:
                     nc.bayofrum.net:

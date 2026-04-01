@@ -22,7 +22,7 @@
       - 'hass14.conf'
       - 'mail.conf'
       - 'mosquitto.conf'
-      - 'photos.conf'
+      - 'db.conf'
   - name: enable jail rc.conf
     community.general.sysrc:
       name: 'jail_enable'
