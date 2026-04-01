@@ -32,27 +32,23 @@
       owner: root
       group: wheel
       mode: '0644'
-  - name: install pegasus repo
+  - name: install repos
     ansible.builtin.template:
-      src: ../../templates/pkg_repos/pegasus.conf
-      dest: /usr/local/etc/pkg/repos/pegasus.conf
+      src: '../../templates/pkg_repos/{{ item }}.conf'
+      dest: '/usr/local/etc/pkg/repos/{{ item }}.conf'
       owner: root
       group: wheel
       mode: '0644'
-  - name: install pegasus-base repo
-    ansible.builtin.template:
-      src: ../../templates/pkg_repos/pegasus-base.conf
-      dest: /usr/local/etc/pkg/repos/pegasus-base.conf
-      owner: root
-      group: wheel
-      mode: '0644'
-  - name: remove dshs repos
+    loop:
+      - pegasus
+      - dshs-base
+  - name: remove repos
     ansible.builtin.file:
       path: '/usr/local/etc/pkg/repos/{{ item }}.conf'
       state: absent
     loop:
       - dshs
-      - dshs-base
+      - pegasus-base
 #  - name: remove pegasus repos
 #    ansible.builtin.file:
 #      path: '/usr/local/etc/pkg/repos/{{ item }}.conf'
