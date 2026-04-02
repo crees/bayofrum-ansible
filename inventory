@@ -11,6 +11,9 @@ all:
               hosts:
                 dc.bayofrum.net:
               children:
+                network_storage:
+                  hosts:
+                    bt.bayofrum.net:
                 database:
                   hosts:
                     db.bayofrum.net:

@@ -1,0 +1,26 @@
+---
+
+- name: install and activate transmission
+  hosts: network_storage
+  become: true
+  tasks:
+  - name: install transmission
+    pkgng:
+      name: transmission_daemon transmission_tools transmission_web
+  - name: add transmission runsv directory
+    ansible.builtin.file:
+      path: /etc/sv/transmission
+      state: directory
+      mode: '0755'
+  - name: add transmission runsv file
+    ansible.builtin.template:
+      src: ../../templates/runit/transmission_run
+      dest: /etc/sv/transmission/run
+      owner: root
+      group: wheel
+      mode: '0755'
+  - name: enable transmission boot
+    ansible.builtin.file:
+      src: /etc/sv/transmission
+      dest: /var/service/transmission
+      state: link

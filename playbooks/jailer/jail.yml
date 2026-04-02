@@ -23,6 +23,7 @@
       - 'mail.conf'
       - 'mosquitto.conf'
       - 'db.conf'
+      - 'bt.conf'
   - name: enable jail rc.conf
     community.general.sysrc:
       name: 'jail_enable'
