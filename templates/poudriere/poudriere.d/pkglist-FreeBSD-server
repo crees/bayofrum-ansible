@@ -77,6 +77,7 @@ net-mgmt/adcli
 net-p2p/transmission-components@cli
 net-p2p/transmission-components@daemon
 net-p2p/transmission-components@utils
+net-p2p/transmission-components@web
 net/isc-dhcp44-server
 net/nss_ldap
 net/onedrive
