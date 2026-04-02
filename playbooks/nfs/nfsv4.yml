@@ -1,0 +1,17 @@
+---
+
+- name: run nfsv4
+  hosts: network_storage
+  become: true
+  tasks:
+  - name: enable nfs services rc.conf
+    community.general.sysrc:
+      name: '{{ item.var }}'
+      value: '{{ item.val }}'
+    register: sysrc
+    loop:
+      - { var: nfs_server_enable, val: yes }
+      - { var: nfsv4_server_only, val: yes }
+      - { var: nfs_server_flags, val: '-t' }
+      - { var: nfsuserd_enable, val: yes }
+      - { var: gssd_enable, val: yes }
