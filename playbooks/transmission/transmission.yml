@@ -6,7 +6,7 @@
   tasks:
   - name: install transmission
     pkgng:
-      name: transmission_daemon transmission_tools transmission_web
+      name: transmission-cli transmission-daemon transmission-tools
   - name: add transmission runsv directory
     ansible.builtin.file:
       path: /etc/sv/transmission
