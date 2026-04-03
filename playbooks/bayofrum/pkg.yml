@@ -41,14 +41,14 @@
       mode: '0644'
     loop:
       - pegasus
-      - dshs-base
+      - pegasus-base
   - name: remove repos
     ansible.builtin.file:
       path: '/usr/local/etc/pkg/repos/{{ item }}.conf'
       state: absent
     loop:
       - dshs
-      - pegasus-base
+      - dshs-base
 #  - name: remove pegasus repos
 #    ansible.builtin.file:
 #      path: '/usr/local/etc/pkg/repos/{{ item }}.conf'
