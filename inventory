@@ -10,6 +10,7 @@ all:
             server:
               hosts:
                 dc.bayofrum.net:
+                z2m.bayofrum.net:
               children:
                 network_storage:
                   hosts:
