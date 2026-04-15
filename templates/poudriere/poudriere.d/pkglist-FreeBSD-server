@@ -141,6 +141,7 @@ www/mod_wsgi
 www/npm
 www/onlyoffice-documentserver
 www/php84-opcache
+www/py-calibreweb
 x11-wm/twm
 x11/xinit
 x11/xterm
