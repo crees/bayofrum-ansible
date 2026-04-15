@@ -9,6 +9,7 @@ all:
           children:
             server:
               hosts:
+                calibre.bayofrum.net:
                 dc.bayofrum.net:
                 z2m.bayofrum.net:
               children:
