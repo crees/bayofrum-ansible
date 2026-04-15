@@ -25,6 +25,7 @@
       - 'db.conf'
       - 'bt.conf'
       - 'z2m.conf'
+      - 'calibre.conf'
   - name: enable jail rc.conf
     community.general.sysrc:
       name: 'jail_enable'
