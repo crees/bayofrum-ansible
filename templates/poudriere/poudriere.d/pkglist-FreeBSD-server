@@ -131,6 +131,8 @@ textproc/rubygem-asciidoctor
 textproc/rubygem-rouge
 textproc/ydiff
 www/apache24
+www/py-calibreweb
+www/py-flask-simpleldap
 www/jitsi-meet
 www/mod_authnz_external24
 www/mod_authz_unixgroup24
