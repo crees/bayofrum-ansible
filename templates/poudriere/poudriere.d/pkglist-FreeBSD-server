@@ -122,6 +122,7 @@ sysutils/screen
 sysutils/smartmontools
 sysutils/usermin
 sysutils/webmin
+textproc/kepubify
 textproc/openjade
 textproc/php84-simplexml
 textproc/php84-xmlreader
