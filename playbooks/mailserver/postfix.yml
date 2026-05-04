@@ -1,7 +1,7 @@
 ---
 
 - name: install and activate postfix
-  hosts: pegasus.bayofrum.net
+  hosts: mail.bayofrum.net
   become: true
   tasks:
   - name: install postfix-sasl

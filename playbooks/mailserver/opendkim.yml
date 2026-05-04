@@ -1,7 +1,7 @@
 ---
 
 - name: install and activate opendkim
-  hosts: pegasus.bayofrum.net
+  hosts: mail.bayofrum.net
   become: true
   vars:
     dkim_key: dkim20210211
