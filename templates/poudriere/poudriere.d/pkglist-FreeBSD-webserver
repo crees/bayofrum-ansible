@@ -1,2 +1,8 @@
+archivers/php84-phar
 databases/mysql84-server
+databases/php84-sqlite3
 databases/phpmyadmin
+devel/php-composer
+devel/php84-gettext
+devel/php84-pcntl
+devel/php84-tokenizer
