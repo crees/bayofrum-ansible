@@ -4,7 +4,7 @@
   hosts: mail.bayofrum.net
   become: true
   vars:
-    dkim_key: dkim20210211
+    dkim_key: dkim202510160
   tasks:
   - name: install opendkim
     pkgng:
@@ -27,13 +27,13 @@
       regexp: "{{ item.regexp }}"
       line: "{{ item.line }}"
     loop:
-      - { regexp: '^#? ?Canonicalization[[:space:]]', line: 'Canonicalization	relaxed/simple' }
-      - { regexp: '^#? ?Domain[[:space:]]', line: 'Domain	bayofrum.net,thistlecorner.net,rees.space' }
-      - { regexp: '^#? ?Keyfile[[:space:]]', line: 'Keyfile	/var/db/dkim/{{ dkim_key }}.private' }
-      - { regexp: '^#? ?ReportAddress[[:space:]]', line: 'ReportAddress	"DKIM Error Postmaster postmaster@{{ ansible_nodename.split(".")[1:]|join(".") }}"' }
-      - { regexp: '^#? ?Selector[[:space:]]', line: 'Selector	{{ dkim_key }}' }
-      - { regexp: '^#? ?SendReports[[:space:]]', line: 'SendReports	yes' }
-      - { regexp: '^#? ?Socket[[:space:]]', line: 'Socket	inet:8891@localhost' }
+      - { regexp: '^#? ?Canonicalization\s', line: 'Canonicalization	relaxed/simple' }
+      - { regexp: '^#? ?Domain\s', line: 'Domain	bayofrum.net,thistlecorner.net,rees.space,kilgallon.net' }
+      - { regexp: '^#? ?KeyFile\s', line: 'KeyFile	/var/db/dkim/{{ dkim_key }}.private' }
+      - { regexp: '^#? ?ReportAddress\s', line: 'ReportAddress	postmaster@{{ ansible_nodename.split(".")[1:]|join(".") }}' }
+      - { regexp: '^#? ?Selector\s', line: 'Selector	{{ dkim_key }}' }
+      - { regexp: '^#? ?SendReports\s', line: 'SendReports	yes' }
+      - { regexp: '^#? ?Socket\s', line: 'Socket	inet:8891@localhost' }
   - name: create domain keys dir
     ansible.builtin.file:
       path: /var/db/dkim
@@ -59,4 +59,3 @@
       src: /etc/sv/milteropendkim
       dest: /var/service/milteropendkim
       state: link
-#      - { regexp: '^#? ?Domain[[:space:]]', line: 'Domain	{{ ansible_nodename.split(".")[1:]|join(".") }}' }
