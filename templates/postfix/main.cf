@@ -696,32 +696,39 @@ shlib_directory = /usr/local/lib/postfix
 # between multiple Postfix instances.
 meta_directory = /usr/local/libexec/postfix
 
+# extras added
 inet_protocols = ipv4
-smtp_tls_CApath = /etc/ssl/certs
-shlib_directory = /usr/local/lib/postfix
-meta_directory = /usr/local/libexec/postfix
 mailbox_size_limit = 0
 virtual_mailbox_limit = 0
+
+# This was the UWClub size limit
 message_size_limit = 204800000
+
 smtp_generic_maps = hash:/usr/local/etc/postfix/generic
-smtp_tls_security_level = may
+
 smtpd_sasl_auth_enable = yes
 smtpd_sasl_type = dovecot
 smtpd_sasl_path = private/dovecot-auth
+
 smtpd_tls_security_level = may
 smtpd_tls_cert_file = /usr/local/etc/letsencrypt/live/pegasus.bayofrum.net/fullchain.pem
 smtpd_tls_key_file = /usr/local/etc/letsencrypt/live/pegasus.bayofrum.net/privkey.pem
+
 smtpd_recipient_restrictions = permit_mynetworks, permit_sasl_authenticated, reject_unauth_destination, reject_rbl_client zen.spamhaus.org, reject_rhsbl_helo dbl.spamhaus.org, reject_rhsbl_sender dbl.spamhaus.org, check_policy_service unix:private/spf-policy
 smtpd_data_restrictions = reject_unauth_pipelining
 smtpd_relay_restrictions = permit_mynetworks permit_sasl_authenticated defer_unauth_destination
-meta_directory = /usr/local/libexec/postfix
-shlib_directory = /usr/local/lib/postfix
+
+#SPF
 spf-policy_time_limit = 3600
-milter_default_action = accept
+
+# until Dovecot supports it...
 smtputf8_enable = no
-smtpd_milters = inet:127.0.0.1:8891
+
+# postfix to use dkim and dmarc milter
+smtpd_milters = inet:127.0.0.1:8891,inet:127.0.0.1:8893
 non_smtpd_milters = $smtpd_milters
 milter_default_action = accept
+
 sender_canonical_maps = socketmap:unix:srs:forward
 sender_canonical_classes = envelope_sender
 recipient_canonical_maps = socketmap:unix:srs:reverse
