@@ -1,0 +1,52 @@
+---
+
+- name: install and activate opendmarc
+  hosts: mail.bayofrum.net
+  become: true
+  tasks:
+  - name: install opendmarc
+    pkgng:
+      name: opendmarc
+  - name: add opendmarc runsv directory
+    ansible.builtin.file:
+      path: /etc/sv/milteropendmarc
+      state: directory
+      mode: '0755'
+  - name: add opendmarc runsv file
+    ansible.builtin.template:
+      src: ../../templates/runit/milteropendmarc_run
+      dest: /etc/sv/milteropendmarc/run
+      owner: root
+      group: wheel
+      mode: '0755'
+  - name: ensure conf file exists
+    ansible.builtin.copy:
+      remote_src: true
+      src: /usr/local/etc/mail/opendmarc.conf.sample
+      dest: /usr/local/etc/mail/opendmarc.conf
+      force: false
+  - name: configure opendmarc
+    ansible.builtin.lineinfile:
+      dest: /usr/local/etc/mail/opendmarc.conf
+      regexp: "{{ item.regexp }}"
+      line: "{{ item.line }}"
+    loop:
+      - { regexp: '^#? ?CopyFailuresTo\s', line: 'CopyFailuresTo	postmaster@bayfrum.net' }
+      - { regexp: '^#? ?FailureReports\s', line: 'FailureReports	true' }
+      - { regexp: '^#? ?FailureReportsBcc\s', line: 'FailureReportsBcc	postmaster@bayfrum.net' }
+      - { regexp: '^#? ?HistoryFile\s', line: 'HistoryFile	/var/db/dmarc/opendmarc.dat' }
+      - { regexp: '^#? ?IgnoreAuthenticatedClients\s', line: 'IgnoreAuthenticatedClients	true' }
+      - { regexp: '^#? ?Socket\s', line: 'Socket	inet:8893@localhost' }
+      - { regexp: '^#? ?FailureReports\s', line: 'FailureReports	true' }
+  - name: create dmarc DB folder
+    ansible.builtin.file:
+      path: /var/db/dmarc
+      state: directory
+      owner: postfix
+      group: postfix
+      mode: 0700
+  - name: enable opendmarc boot
+    ansible.builtin.file:
+      src: /etc/sv/milteropendmarc
+      dest: /var/service/milteropendmarc
+      state: link
