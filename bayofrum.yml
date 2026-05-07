@@ -24,8 +24,12 @@
 #- ansible.builtin.import_playbook: playbooks/nextcloud/redis.yml
 #- ansible.builtin.import_playbook: playbooks/nextcloud/onlyoffice.yml
 - ansible.builtin.import_playbook: playbooks/mailserver/roundcube.yml
-- ansible.builtin.import_playbook: playbooks/mailserver/postfix.yml
+- ansible.builtin.import_playbook: playbooks/mailserver/dovecot.yml
 - ansible.builtin.import_playbook: playbooks/mailserver/opendkim.yml
+- ansible.builtin.import_playbook: playbooks/mailserver/opendmarc.yml
+- ansible.builtin.import_playbook: playbooks/mailserver/postsrsd.yml
+- ansible.builtin.import_playbook: playbooks/mailserver/postfix.yml
+- ansible.builtin.import_playbook: playbooks/mailserver/mailscanner.yml
 - ansible.builtin.import_playbook: playbooks/transmission/transmission.yml
 - ansible.builtin.import_playbook: playbooks/nfs/nfsv4.yml
 - ansible.builtin.import_playbook: playbooks/homeassistant/hass_pkg.yml
