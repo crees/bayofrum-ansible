@@ -13,6 +13,7 @@
       state: directory
       mode: '0755'
     loop:
+      - clamav_clamd
       - mailscanner
       - msmilter
   - name: add MailScanner services runsv file
@@ -23,6 +24,7 @@
       group: wheel
       mode: '0755'
     loop:
+      - clamav_clamd
       - mailscanner
       - msmilter
   - name: ensure directories exist
@@ -56,5 +58,6 @@
       dest: '/var/service/{{ item }}'
       state: link
     loop:
+      - clamav_clamd
       - mailscanner
       - msmilter
