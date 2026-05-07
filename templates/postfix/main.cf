@@ -708,7 +708,7 @@ smtp_generic_maps = hash:/usr/local/etc/postfix/generic
 
 smtpd_sasl_auth_enable = yes
 smtpd_sasl_type = dovecot
-smtpd_sasl_path = private/dovecot-auth
+smtpd_sasl_path = private/auth
 
 smtpd_tls_security_level = may
 smtpd_tls_cert_file = /usr/local/etc/letsencrypt/live/mail.bayofrum.net/fullchain.pem
