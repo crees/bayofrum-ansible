@@ -36,7 +36,3 @@
       src: /etc/sv/postfix
       dest: /var/service/postfix
       state: link
-  - name: reload postfix
-    community.general.runit:
-      name: postfix
-      state: reloaded

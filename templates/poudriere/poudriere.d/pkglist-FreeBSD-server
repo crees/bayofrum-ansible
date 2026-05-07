@@ -59,8 +59,10 @@ mail/mailscanner
 mail/mutt
 mail/opendkim
 mail/opendmarc
+mail/p5-Sendmail-PMilter
 mail/postfix@sasl
 mail/postfix-policyd-spf-perl
+mail/postsrsd
 mail/roundcube
 math/blas
 math/lapack
