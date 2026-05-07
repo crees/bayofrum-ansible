@@ -711,8 +711,8 @@ smtpd_sasl_type = dovecot
 smtpd_sasl_path = private/dovecot-auth
 
 smtpd_tls_security_level = may
-smtpd_tls_cert_file = /usr/local/etc/letsencrypt/live/pegasus.bayofrum.net/fullchain.pem
-smtpd_tls_key_file = /usr/local/etc/letsencrypt/live/pegasus.bayofrum.net/privkey.pem
+smtpd_tls_cert_file = /usr/local/etc/letsencrypt/live/mail.bayofrum.net/fullchain.pem
+smtpd_tls_key_file = /usr/local/etc/letsencrypt/live/mail.bayofrum.net/privkey.pem
 
 smtpd_recipient_restrictions = permit_mynetworks, permit_sasl_authenticated, reject_unauth_destination, reject_rbl_client zen.spamhaus.org, reject_rhsbl_helo dbl.spamhaus.org, reject_rhsbl_sender dbl.spamhaus.org, check_policy_service unix:private/spf-policy
 smtpd_data_restrictions = reject_unauth_pipelining
