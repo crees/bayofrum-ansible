@@ -1,0 +1,68 @@
+---
+
+- name: install and activate dovecot
+  hosts: mail.bayofrum.net
+  become: true
+  tasks:
+  - name: install dovecot
+    pkgng:
+      name: dovecot dovecot-pigeonhole
+  - name: add dovecot runsv directory
+    ansible.builtin.file:
+      path: /etc/sv/dovecot
+      state: directory
+      mode: '0755'
+  - name: add dovecot runsv file
+    ansible.builtin.template:
+      src: ../../templates/runit/dovecot_run
+      dest: /etc/sv/dovecot/run
+      owner: root
+      group: wheel
+      mode: '0755'
+  - name: ensure directories exist
+    ansible.builtin.file:
+      path: '/usr/local/etc/dovecot/{{ item }}'
+      state: directory
+      owner: root
+      group: wheel
+      mode: '0755'
+    loop:
+      - sieve.d
+      - imap_sieve.d
+      - conf.d
+  - name: add dovecot pam file
+    ansible.builtin.template:
+      src: '../../templates/pam.d/dovecot'
+      dest: '/etc/pam.d/dovecot'
+      owner: root
+      group: wheel
+      mode: '0644'
+  - name: add dovecot config files
+    ansible.builtin.template:
+      src: '../../templates/dovecot/{{ item }}'
+      dest: '/usr/local/etc/dovecot/{{ item }}'
+      owner: root
+      group: wheel
+      mode: '0644'
+    loop:
+      - conf.d/20-imap.conf
+      - conf.d/90-antispam.conf
+      - conf.d/15-mailboxes.conf
+      - conf.d/90-sieve.conf
+      - conf.d/10-master.conf
+      - conf.d/10-mail.conf
+      - conf.d/15-lda.conf
+      - conf.d/10-ssl.conf
+      - conf.d/10-auth.conf
+      - conf.d/auth-system.conf.ext
+      - dovecot.conf
+      - imap_sieve.d/queue_spam.sieve
+      - imap_sieve.d/dovecot-mailtrain.sh
+      - imap_sieve.d/queue_ham.sieve
+      - sieve.d/Makefile
+      - sieve.d/100-spamassassin.sieve
+  - name: enable dovecot boot
+    ansible.builtin.file:
+      src: /etc/sv/dovecot
+      dest: /var/service/dovecot
+      state: link

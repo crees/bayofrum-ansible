@@ -1,0 +1,60 @@
+---
+
+- name: install and activate MailScanner
+  hosts: mail.bayofrum.net
+  become: true
+  tasks:
+  - name: install MailScanner
+    pkgng:
+      name: MailScanner p5-Sendmail-PMilter
+  - name: add MailScanner services runsv directory
+    ansible.builtin.file:
+      path: '/etc/sv/{{ item }}'
+      state: directory
+      mode: '0755'
+    loop:
+      - mailscanner
+      - msmilter
+  - name: add MailScanner services runsv file
+    ansible.builtin.template:
+      src: '../../templates/runit/{{ item }}_run'
+      dest: '/etc/sv/{{ item }}/run'
+      owner: root
+      group: wheel
+      mode: '0755'
+    loop:
+      - mailscanner
+      - msmilter
+  - name: ensure directories exist
+    ansible.builtin.file:
+      path: '/var/spool/MailScanner/{{ item }}'
+      state: directory
+      owner: postfix
+      group: clamav
+      mode: '0755'
+    loop:
+      - bayes
+      - incoming/Locks
+      - milterin
+      - milterout
+      - quarantine
+      - spamassassin
+  - name: add MailScanner config files
+    ansible.builtin.template:
+      src: '../../templates/MailScanner/{{ item }}'
+      dest: '/usr/local/etc/MailScanner/{{ item }}'
+      owner: root
+      group: wheel
+      mode: '0644'
+    loop:
+      - MailScanner.conf
+      - filename.rules.conf
+      - spamassassin.conf
+  - name: enable MailScanner services boot
+    ansible.builtin.file:
+      src: '/etc/sv/{{ item }}'
+      dest: '/var/service/{{ item }}'
+      state: link
+    loop:
+      - mailscanner
+      - msmilter
