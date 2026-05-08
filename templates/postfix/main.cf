@@ -700,6 +700,7 @@ meta_directory = /usr/local/libexec/postfix
 inet_protocols = ipv4
 mailbox_size_limit = 0
 virtual_mailbox_limit = 0
+smtp_helo_name = pegasus.bayofrum.net
 
 # This was the UWClub size limit
 message_size_limit = 204800000
