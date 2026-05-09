@@ -727,8 +727,8 @@ smtputf8_enable = no
 
 # postfix to use dkim and dmarc and MailScanner milter
 # Only do DKIM and DMARC miltering once
-smtpd_milters = inet:127.0.0.1:33333
-non_smtpd_milters = inet:127.0.0.1:8891,inet:127.0.0.1:8893
+smtpd_milters = unix:/var/spool/postfix/private/dkim-verify,unix:/var/spool/postfix/private/dmarc,inet:127.0.0.1:33333
+non_smtpd_milters = unix:/var/spool/postfix/private/dkim-sign
 milter_default_action = accept
 qmqpd_authorized_clients = 127.0.0.1,mail.bayofrum.net
 

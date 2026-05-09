@@ -36,7 +36,7 @@
       - { regexp: '^#? ?FailureReportsBcc\s', line: 'FailureReportsBcc	postmaster@bayfrum.net' }
       - { regexp: '^#? ?HistoryFile\s', line: 'HistoryFile	/var/db/dmarc/opendmarc.dat' }
       - { regexp: '^#? ?IgnoreAuthenticatedClients\s', line: 'IgnoreAuthenticatedClients	true' }
-      - { regexp: '^#? ?Socket\s', line: 'Socket	inet:8893@localhost' }
+      - { regexp: '^#? ?Socket\s', line: 'Socket	local:/var/spool/postfix/private/dmarc' }
       - { regexp: '^#? ?FailureReports\s', line: 'FailureReports	true' }
   - name: create dmarc DB folder
     ansible.builtin.file:

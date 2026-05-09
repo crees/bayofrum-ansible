@@ -11,29 +11,40 @@
       name: opendkim
   - name: add opendkim runsv directory
     ansible.builtin.file:
-      path: /etc/sv/milteropendkim
+      path: '/etc/sv/{{ item }}'
       state: directory
       mode: '0755'
+    loop:
+      - milteropendkim_sign
+      - milteropendkim_verify
   - name: add opendkim runsv file
     ansible.builtin.template:
-      src: ../../templates/runit/milteropendkim_run
-      dest: /etc/sv/milteropendkim/run
+      src: '../../templates/runit/{{ item }}_run'
+      dest: '/etc/sv/{{ item }}/run'
       owner: root
       group: wheel
       mode: '0755'
+    loop:
+      - milteropendkim_sign
+      - milteropendkim_verify
+  - name: add dkim config files
+    ansible.builtin.template:
+      src: '../../templates/mail/{{ item }}'
+      dest: '/usr/local/etc/mail/{{ item }}'
+      owner: root
+      group: wheel
+      mode: '0644'
+    loop:
+      - opendkim-sign.conf
+      - opendkim-verify.conf
   - name: configure opendkim
     ansible.builtin.lineinfile:
-      dest: /usr/local/etc/mail/opendkim.conf
+      dest: /usr/local/etc/mail/opendkim-sign.conf
       regexp: "{{ item.regexp }}"
       line: "{{ item.line }}"
     loop:
-      - { regexp: '^#? ?Canonicalization\s', line: 'Canonicalization	relaxed/simple' }
-      - { regexp: '^#? ?Domain\s', line: 'Domain	bayofrum.net,thistlecorner.net,rees.space,kilgallon.net' }
       - { regexp: '^#? ?KeyFile\s', line: 'KeyFile	/var/db/dkim/{{ dkim_key }}.private' }
-      - { regexp: '^#? ?ReportAddress\s', line: 'ReportAddress	postmaster@{{ ansible_nodename.split(".")[1:]|join(".") }}' }
       - { regexp: '^#? ?Selector\s', line: 'Selector	{{ dkim_key }}' }
-      - { regexp: '^#? ?SendReports\s', line: 'SendReports	yes' }
-      - { regexp: '^#? ?Socket\s', line: 'Socket	inet:8891@localhost' }
   - name: create domain keys dir
     ansible.builtin.file:
       path: /var/db/dkim
@@ -56,6 +67,9 @@
       - { ext: 'txt' }
   - name: enable opendkim boot
     ansible.builtin.file:
-      src: /etc/sv/milteropendkim
-      dest: /var/service/milteropendkim
+      src: '/etc/sv/{{ item }}'
+      dest: '/var/service/{{ item }}'
       state: link
+    loop:
+      - milteropendkim_sign
+      - milteropendkim_verify
