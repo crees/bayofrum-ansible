@@ -1,0 +1,40 @@
+#!/bin/sh -
+#
+# $FreeBSD
+#
+
+if [ -r /etc/defaults/periodic.conf ]; then
+	. /etc/defaults/periodic.conf
+	source_periodic_confs
+fi
+
+rc=0
+
+err() {
+	msg=$1
+
+	echo $msg
+	exit 1
+}
+
+case "${daily_sa_learn_enable:-no}" in
+[Nn][Oo])
+	;;
+*)
+	sa_learn=/usr/local/bin/sa-learn
+	root_dir=/var/spool/mailtrain
+
+	mkdir -pm 1777 $root_dir/spam $root_dir/ham $root_dir/tmp
+
+	for m in ham spam; do
+		if [ -z "$(find $root_dir/$m -type d -prune -empty)" ]; then
+			$sa_learn --$m $root_dir/$m/ >/dev/null || err "$m learning failed"
+		fi
+	done
+
+	find $root_dir -mindepth 2 -delete
+
+	;;
+esac
+
+exit $rc

@@ -27,6 +27,13 @@
       - clamav_clamd
       - mailscanner
       - msmilter
+  - name: add sa-learn periodic file
+    ansible.builtin.template:
+      src: '../../templates/periodic/daily/600.sa-learn'
+      dest: '/usr/local/etc/periodic/daily/600.sa-learn'
+      owner: root
+      group: wheel
+      mode: '0755'
   - name: ensure directories exist
     ansible.builtin.file:
       path: '/var/spool/MailScanner/{{ item }}'
