@@ -735,4 +735,4 @@ qmqpd_authorized_clients = 127.0.0.1,mail.bayofrum.net
 sender_canonical_maps = socketmap:unix:srs:forward
 sender_canonical_classes = envelope_sender
 recipient_canonical_maps = socketmap:unix:srs:reverse
-recipient_canonical_classes = envelope_recipient, header_recipient
+recipient_canonical_classes = envelope_recipient
