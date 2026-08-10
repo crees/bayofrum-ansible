@@ -3,7 +3,7 @@
 srcdir=/exports/src
 # Need the -pegasus suffix or Poudriere uses builtin manifests
 # and refuses to use our tarballs
-srcvers="releng-15.0:15.0-RELEASE-pegasus"
+srcvers="releng-15.1:15.1-RELEASE-pegasus"
 archs=${1:-"amd64"}
 
 poudriere=/usr/local/bin/poudriere
@@ -65,9 +65,12 @@ bulkjail() {
 	local _jail
 	_jail=$1
 
+	_pkglist=''
+
 	for f in /usr/local/etc/poudriere.d/pkglist-FreeBSD*; do
-		$poudriere bulk -j $_jail -p default -f $f -b quarterly
+		_pkglist="-f $f $_pkglist"
 	done
+	$poudriere bulk -j $_jail -p default $_pkglist -b quarterly
 }
 
 if [ ! -e /nobuildeverything ]; then
