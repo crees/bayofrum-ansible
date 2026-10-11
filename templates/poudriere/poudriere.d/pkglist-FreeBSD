@@ -1,7 +1,7 @@
+databases/openldap26-client
 devel/ccache
 devel/git
 editors/vim
-net/openldap26-client
 net-mgmt/adcli
 security/cyrus-sasl2-gssapi
 security/pam_mkhomedir

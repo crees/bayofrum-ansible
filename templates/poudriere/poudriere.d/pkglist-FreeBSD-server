@@ -1,6 +1,7 @@
 archivers/7-zip
 archivers/php84-bz2
 archivers/php84-zlib
+archivers/py-borgbackup
 audio/id3v2
 audio/mpg123
 audio/musicpc
@@ -81,9 +82,9 @@ net-p2p/transmission-components@daemon
 net-p2p/transmission-components@utils
 net-p2p/transmission-components@web
 net/isc-dhcp44-server
+net/keycloak
 net/nss_ldap
 net/onedrive
-net/openldap26-server
 net/php84-ldap
 net/php84-soap
 net/poptop
