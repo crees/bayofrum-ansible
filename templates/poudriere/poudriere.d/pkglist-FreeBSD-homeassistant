@@ -2,5 +2,6 @@ databases/py-sqlite3
 devel/cmake-core
 devel/py-pyproject-hooks
 graphics/jpeg-turbo
+graphics/libjpeg-turbo
 math/openblas
 multimedia/ffmpeg
