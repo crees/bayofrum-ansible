@@ -123,6 +123,7 @@ sysutils/monitorix
 sysutils/php84-posix
 sysutils/screen
 sysutils/smartmontools
+sysutils/sylve
 sysutils/usermin
 sysutils/webmin
 textproc/kepubify
