@@ -32,7 +32,7 @@ devel/subversion
 databases/pecl-memcached
 databases/pecl-redis
 databases/redis
-dns/bind918
+dns/bind920
 dns/namesilo_ddns
 editors/vim
 emulators/qemu-user-static
